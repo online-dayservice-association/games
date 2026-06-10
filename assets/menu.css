@@ -1,30 +1,42 @@
 /* =========================================================
    menu.css — メニュー画面（index.html）に固有のレイアウト
-   ヘッダーとカードのグリッドだけをここに置く。共通部品は base.css。
+   ヘッダー・セクション見出し・カードのグリッド。共通部品は base.css。
    ========================================================= */
 
-header{padding:56px 0 8px;text-align:center;}
+/* --- ヘッダー（ヒーロー） --- */
+header{padding:60px 0 4px;text-align:center;}
 .eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:18px;
   font-size:var(--fz-small);letter-spacing:.18em;
-  color:var(--accent-deep);font-weight:500;margin-bottom:14px;
+  color:var(--accent-deep);font-weight:500;margin-bottom:24px;
 }
+.eyebrow::before,.eyebrow::after{content:"";width:46px;height:1px;background:var(--line);}
 h1{
   font-family:var(--font-head);font-weight:700;
-  font-size:var(--fz-title);margin:0 0 18px;letter-spacing:.04em;
+  font-size:var(--fz-title);margin:0 0 22px;letter-spacing:.05em;line-height:1.25;
 }
 .lead{
-  max-width:640px;margin:0 auto;color:var(--muted);
-  font-size:var(--fz-lead);
+  max-width:680px;margin:0 auto;color:var(--muted);
+  font-size:var(--fz-lead);line-height:1.95;
 }
 
+/* --- セクション見出し（明朝＋線＋件数） --- */
+.section-label{display:flex;align-items:center;gap:18px;margin:50px 0 20px;}
+.section-label .label{
+  font-family:var(--font-head);font-weight:700;font-size:22px;
+  color:var(--ink);white-space:nowrap;letter-spacing:.04em;
+}
+.section-label .line{flex:1;height:1px;background:var(--line);}
+.section-label .count{font-size:14px;color:var(--muted);white-space:nowrap;}
+
+/* --- グリッド（準備中の素材） --- */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
   gap:var(--space);
-  margin:0 0 8px;
 }
 
-/* 注目カードは狭い画面で縦積みにする */
+/* --- 狭い画面：注目カードは縦積みにする --- */
 @media (max-width:560px){
   .card.feature{flex-direction:column;align-items:flex-start;}
   .card.feature .btn{width:100%;}

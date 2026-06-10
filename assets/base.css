@@ -1,7 +1,6 @@
 /* =========================================================
    base.css — 共通の土台と再利用パーツ
    tokens.css の変数を消費する。色や数値の直書きはしない（必ず var(--…)）。
-   ここに置くもの：リセット / 本文タイポgrafィ / カード・バッジ・注記・フッター等の共通部品。
    ========================================================= */
 
 *{box-sizing:border-box;}
@@ -16,54 +15,36 @@ body{
 }
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
 
-/* 区切りの短い線 */
-.rule{width:48px;height:2px;background:var(--accent);margin:28px auto 0;border-radius:2px;}
-
-/* --- カード（共通部品） --- */
+/* --- カード（共通の土台） --- */
 .card{
   display:flex;flex-direction:column;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:20px 20px 18px;
+  padding:22px;
   text-decoration:none;color:inherit;
-  position:relative;min-height:128px;
+  position:relative;
   transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-a.card:hover{
-  transform:translateY(-3px);
-  box-shadow:var(--shadow);
-  border-color:var(--accent);
 }
 .card .name{
   font-family:var(--font-head);font-weight:700;
   font-size:var(--fz-card-title);margin-bottom:6px;letter-spacing:.02em;
 }
 .card .desc{font-size:var(--fz-card-desc);color:var(--muted);line-height:1.7;}
-.badge{
-  align-self:flex-start;margin-top:auto;padding-top:12px;
-  font-size:var(--fz-small);font-weight:500;letter-spacing:.04em;
-}
-.card.ready .badge{color:var(--accent-deep);}
-.card.soon{opacity:.62;cursor:default;}
-.card.soon .badge{color:var(--muted);}
-.card.ready::after{
-  content:"";position:absolute;top:16px;right:16px;
-  width:9px;height:9px;border-radius:50%;background:var(--accent);
-}
 
-/* --- 注記ボックス --- */
-.note{
-  margin:34px 0 0;padding:20px 22px;
-  background:var(--card);border:1px solid var(--line);border-radius:12px;
-  font-size:var(--fz-card-desc);color:var(--muted);
+/* --- 「公開中」バッジ（塗り） --- */
+.badge-live{
+  display:inline-flex;align-items:center;gap:.5em;align-self:flex-start;
+  padding:6px 15px;border-radius:999px;
+  background:var(--accent);color:#fff;
+  font-size:13px;font-weight:700;letter-spacing:.06em;
 }
-.note b{color:var(--ink);font-weight:700;}
+.badge-live::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff;}
 
 /* --- ボタン --- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.4em;
-  padding:14px 28px;border-radius:999px;
+  padding:15px 34px;border-radius:999px;
   background:var(--accent);color:#fff;
   font-family:var(--font-body);font-weight:700;font-size:18px;
   text-decoration:none;white-space:nowrap;
@@ -74,27 +55,36 @@ a.card:hover .btn{background:var(--accent-deep);}
 
 /* --- 注目カード（今すぐ遊べる） --- */
 .card.feature{
-  flex-direction:row;align-items:center;justify-content:space-between;gap:24px;
-  background:var(--accent-soft);border-color:#cfd6c2;
-  padding:28px 30px;min-height:auto;
+  flex-direction:row;align-items:center;justify-content:space-between;gap:28px;
+  padding:30px 32px;
 }
-.card.feature .name{font-size:24px;margin-bottom:8px;}
-.card.feature .desc{font-size:16px;}
+a.card.feature:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent);}
+.card.feature .name{font-size:26px;margin:12px 0 8px;}
+.card.feature .desc{font-size:16px;max-width:46ch;}
 
-/* --- セクション見出し --- */
-.section-label{
-  display:flex;align-items:center;gap:14px;
-  margin:44px 0 18px;
-  color:var(--accent-deep);font-weight:700;font-size:14px;letter-spacing:.12em;
+/* --- 準備中カード（淡い点線・控えめ） --- */
+.card.soon{background:transparent;border:1px dashed var(--line);}
+.card.soon .name{color:var(--ink-soft);}
+.tag-soon{
+  align-self:flex-start;margin-top:auto;
+  padding:4px 13px;border:1px solid var(--line);border-radius:999px;
+  font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em;
 }
-.section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+
+/* --- 注記ボックス --- */
+.note{
+  margin:34px 0 0;padding:20px 22px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  font-size:var(--fz-card-desc);color:var(--muted);
+}
+.note b{color:var(--ink);font-weight:700;}
 
 /* --- キーボード操作のフォーカス（アクセシビリティ） --- */
 a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px;}
 
 /* --- フッター --- */
 footer{
-  margin:48px 0 60px;padding-top:26px;border-top:1px solid var(--line);
+  margin:56px 0 64px;padding-top:28px;border-top:1px solid var(--line);
   text-align:center;color:var(--muted);font-size:14px;
 }
 footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}

@@ -9,6 +9,7 @@
   /* --- 配色（協会サイトと統一：生成りの白 × くすんだ緑） --- */
   --bg:#f7f3ec;          /* 背景：生成りの白 */
   --ink:#33312b;         /* 文字：濃い墨 */
+  --ink-soft:#8c887d;    /* 準備中カードの見出し（控えめ） */
   --muted:#7a766c;       /* 補助テキスト */
   --accent:#6f7d5e;      /* アクセント：くすんだ緑 */
   --accent-deep:#566049; /* 濃いアクセント */
@@ -22,7 +23,7 @@
   --font-body:"Zen Kaku Gothic New",system-ui,-apple-system,"Segoe UI",sans-serif; /* 本文：角ゴシック */
 
   /* --- 文字サイズ（大きめ基準） --- */
-  --fz-title:clamp(28px,5vw,40px);
+  --fz-title:clamp(30px,5.5vw,50px);
   --fz-lead:clamp(16px,2.6vw,19px);
   --fz-base:17px;
   --fz-card-title:20px;
