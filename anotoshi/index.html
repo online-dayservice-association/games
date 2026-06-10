@@ -172,14 +172,14 @@ const rBtn=document.getElementById('rBtn'), rGo=document.getElementById('rGo'), 
 let spin=null, current=null;
 rBtn.onclick=()=>{
   if(!AVAIL.length) return;
-  if(spin){ // ストップ：徐々に減速して止まる
+  if(spin){ // ストップ：短く減速してピタッと止まる（全体で約0.6秒）
     clearInterval(spin); spin=null;
-    let delay=60, count=0, max=12+Math.floor(Math.random()*6);
+    let delay=55, count=0, max=4+Math.floor(Math.random()*2);
     (function slow(){
       current=AVAIL[Math.floor(Math.random()*AVAIL.length)];
       show(current);
       count++;
-      if(count<max){ delay*=1.18; setTimeout(slow,delay); }
+      if(count<max){ delay*=1.5; setTimeout(slow,delay); }
       else{
         rWareki.textContent=wareki(current);
         rMsg.textContent="「"+wareki(current)+"」に到着しました！";
