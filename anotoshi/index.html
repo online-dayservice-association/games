@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あの日あの年｜あそび・脳トレ素材集</title>
+<meta name="description" content="昭和・平成の時間旅行。ルーレットで止まった年へ飛んで、その年の出来事・流行・歌を、みんなで思い出しながら語り合う回想の素材集です。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:40px 0 6px;}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:18px;font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:16px;}
+.eyebrow::before,.eyebrow::after{content:"";width:46px;height:1px;background:var(--line);}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(30px,6vw,46px);letter-spacing:.06em;margin:0 0 8px;}
+.lead{color:var(--muted);font-size:clamp(15px,2.5vw,17px);margin:0;}
+
+.section-label{display:flex;align-items:center;gap:16px;margin:44px 0 18px;}
+.section-label .label{font-family:var(--font-head);font-weight:700;font-size:22px;white-space:nowrap;letter-spacing:.04em;}
+.section-label .line{flex:1;height:1px;background:var(--line);}
+
+/* ルーレット */
+.roulette{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:34px 20px 30px;text-align:center;box-shadow:0 8px 24px rgba(86,96,73,.08);
+}
+.r-title{font-family:var(--font-head);font-weight:700;font-size:20px;color:var(--accent-deep);margin:0 0 18px;letter-spacing:.06em;}
+.r-display{
+  background:var(--bg);border:2px solid var(--accent);border-radius:16px;
+  max-width:420px;margin:0 auto 8px;padding:22px 10px 16px;
+}
+.r-year{font-family:var(--font-head);font-weight:700;font-size:clamp(44px,10vw,64px);line-height:1.1;letter-spacing:.04em;}
+.r-year .unit{font-size:.45em;color:var(--muted);}
+.r-wareki{font-size:clamp(17px,3.5vw,22px);color:var(--accent-deep);font-weight:700;margin-top:2px;}
+.r-msg{min-height:1.6em;color:var(--muted);font-size:15px;margin:8px 0 12px;}
+.r-btn{
+  font-family:var(--font-body);font-weight:700;font-size:21px;
+  padding:16px 52px;border-radius:999px;border:none;cursor:pointer;
+  background:var(--accent);color:#fff;box-shadow:var(--shadow);
+  transition:background .15s ease,transform .12s ease;
+}
+.r-btn:hover{background:var(--accent-deep);transform:translateY(-2px);}
+.r-btn.stop{background:#b9543f;}
+.r-btn.stop:hover{background:#9a4232;}
+.r-go{
+  display:inline-block;margin-top:14px;
+  font-family:var(--font-body);font-weight:700;font-size:19px;
+  padding:14px 40px;border-radius:999px;text-decoration:none;
+  background:#fff;border:2px solid var(--accent);color:var(--accent-deep);
+  transition:background .15s ease,color .15s ease;
+}
+.r-go:hover{background:var(--accent);color:#fff;}
+
+/* 生まれ年の旅 */
+.birth{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+.birth p{margin:0 0 12px;font-size:16px;color:var(--muted);}
+.birth select{
+  font-family:var(--font-body);font-size:19px;padding:12px 16px;
+  border:1px solid var(--accent);border-radius:12px;background:#fff;color:var(--ink);
+}
+.agelist{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+.agebtn{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:10px 16px;border-radius:12px;text-decoration:none;
+  background:var(--bg);border:1px solid var(--accent);color:var(--ink);
+  transition:background .15s ease,transform .12s ease;
+}
+.agebtn:hover{background:#e7ecdd;transform:translateY(-2px);}
+.agebtn .age{font-weight:700;font-size:17px;color:var(--accent-deep);}
+.agebtn .yr{font-size:13.5px;color:var(--muted);}
+.agebtn.disabled{opacity:.45;pointer-events:none;border-color:var(--line);}
+
+/* 年代から選ぶ */
+.era{margin-bottom:18px;}
+.era h3{font-family:var(--font-head);font-size:18px;margin:0 0 10px;color:var(--accent-deep);letter-spacing:.04em;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  font-size:15.5px;padding:8px 14px;border-radius:999px;text-decoration:none;
+  background:var(--card);border:1px solid var(--accent);color:var(--ink);
+  transition:background .15s ease;
+}
+.chip:hover{background:var(--accent);color:#fff;}
+.chip.off{border-color:var(--line);color:var(--muted);opacity:.55;pointer-events:none;}
+
+.note{margin:30px 0 0;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--muted);}
+footer{margin:48px 0 60px;padding-top:24px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+
+  <header>
+    <div class="eyebrow">昭和・平成 時間旅行</div>
+    <h1>あの日あの年</h1>
+    <p class="lead">ルーレットで止まった年へ、みんなで時間旅行。<br>その年の出来事や流行を、思い出しながら語り合いましょう。</p>
+  </header>
+
+  <main>
+
+    <!-- タイムトラベル・ルーレット -->
+    <section>
+      <div class="roulette">
+        <p class="r-title">― タイムトラベル ―</p>
+        <div class="r-display">
+          <div class="r-year"><span id="rYear">19??</span><span class="unit">年</span></div>
+          <div class="r-wareki" id="rWareki">さあ、どの年に行くでしょう</div>
+        </div>
+        <p class="r-msg" id="rMsg">ボタンを押すと、年がまわりはじめます</p>
+        <button class="r-btn" id="rBtn">用意、スタート！</button>
+        <div><a class="r-go" id="rGo" href="#" style="display:none;">この年へ出発する →</a></div>
+      </div>
+    </section>
+
+    <!-- 生まれ年から旅する -->
+    <section>
+      <div class="section-label"><span class="label">生まれた年から旅する</span><span class="line"></span></div>
+      <div class="birth">
+        <p>生まれた年をえらぶと、その方の「10歳のとき」「二十歳のとき」…の年が並びます。押すと、その年へ飛べます。</p>
+        <select id="birthSel"><option value="">生まれた年をえらぶ</option></select>
+        <div class="agelist" id="ageList"></div>
+      </div>
+    </section>
+
+    <!-- 年代から選ぶ -->
+    <section>
+      <div class="section-label"><span class="label">年代からえらぶ</span><span class="line"></span></div>
+      <div id="eras"></div>
+      <p class="note"><b>少しずつ増えています。</b>うすい色の年は準備中です。昭和元年から平成の終わりまで、順番にそろえていきます。</p>
+    </section>
+
+  </main>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a></footer>
+</div>
+
+<script>
+/* ---------- 和暦変換 ---------- */
+function wareki(y){
+  if(y===1926) return "大正15年・昭和元年";
+  if(y<1989) return "昭和"+(y-1925)+"年";
+  if(y===1989) return "昭和64年・平成元年";
+  return "平成"+(y-1988)+"年";
+}
+function warekiBirth(y){ // 生まれ年表示用（大正も）
+  if(y<1926) return "大正"+(y-1911)+"年";
+  return wareki(y);
+}
+const FIRST=1926, LAST=2019;
+
+let AVAIL=[]; // データがある年
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+  AVAIL=Object.keys(d).map(Number).sort((a,b)=>a-b);
+  buildEras(); buildBirth();
+});
+
+/* ---------- ルーレット ---------- */
+const rYear=document.getElementById('rYear'), rWareki=document.getElementById('rWareki');
+const rBtn=document.getElementById('rBtn'), rGo=document.getElementById('rGo'), rMsg=document.getElementById('rMsg');
+let spin=null, current=null;
+rBtn.onclick=()=>{
+  if(!AVAIL.length) return;
+  if(spin){ // ストップ：徐々に減速して止まる
+    clearInterval(spin); spin=null;
+    let delay=60, count=0, max=12+Math.floor(Math.random()*6);
+    (function slow(){
+      current=AVAIL[Math.floor(Math.random()*AVAIL.length)];
+      show(current);
+      count++;
+      if(count<max){ delay*=1.18; setTimeout(slow,delay); }
+      else{
+        rWareki.textContent=wareki(current);
+        rMsg.textContent="「"+wareki(current)+"」に到着しました！";
+        rGo.href="./year.html?y="+current; rGo.style.display="inline-block";
+        rBtn.textContent="もう一度まわす"; rBtn.classList.remove('stop');
+      }
+    })();
+    return;
+  }
+  // スタート
+  rGo.style.display="none";
+  rMsg.textContent="まわっています… 「ストップ」で止めてください";
+  rBtn.textContent="ストップ！"; rBtn.classList.add('stop');
+  spin=setInterval(()=>{
+    current=AVAIL[Math.floor(Math.random()*AVAIL.length)];
+    show(current);
+  },70);
+};
+function show(y){ rYear.textContent=y; rWareki.textContent=wareki(y); }
+
+/* ---------- 生まれ年から旅する ---------- */
+function buildBirth(){
+  const sel=document.getElementById('birthSel');
+  for(let y=1915;y<=1970;y++){
+    const o=document.createElement('option');
+    o.value=y; o.textContent=y+"年（"+warekiBirth(y)+"）生まれ";
+    sel.appendChild(o);
+  }
+  sel.onchange=()=>{
+    const list=document.getElementById('ageList');
+    list.innerHTML='';
+    const b=parseInt(sel.value,10);
+    if(!b) return;
+    for(let age=10;age<=90;age+=5){
+      const y=b+age;
+      if(y<FIRST||y>LAST) continue;
+      const ok=AVAIL.includes(y);
+      const a=document.createElement('a');
+      a.className='agebtn'+(ok?'':' disabled');
+      a.href=ok?('./year.html?y='+y):'#';
+      const label=(age===20)?'二十歳':(age+'歳');
+      a.innerHTML='<span class="age">'+label+'</span><span class="yr">'+y+'年・'+wareki(y).replace('大正15年・','')+(ok?'':'（準備中）')+'</span>';
+      list.appendChild(a);
+    }
+  };
+}
+
+/* ---------- 年代からえらぶ ---------- */
+function buildEras(){
+  const blocks=[
+    ["昭和のはじめ（昭和元〜9年）",1926,1934],
+    ["昭和10年代",1935,1944],
+    ["昭和20年代",1945,1954],
+    ["昭和30年代",1955,1964],
+    ["昭和40年代",1965,1974],
+    ["昭和50年代",1975,1984],
+    ["昭和の終わり・平成のはじめ（昭和60年〜平成6年）",1985,1994],
+    ["平成7〜18年",1995,2006],
+    ["平成19〜31年",2007,2019]
+  ];
+  const box=document.getElementById('eras');
+  blocks.forEach(([t,s,e])=>{
+    const div=document.createElement('div'); div.className='era';
+    let chips='';
+    for(let y=s;y<=e;y++){
+      const ok=AVAIL.includes(y);
+      chips+='<a class="chip'+(ok?'':' off')+'" href="'+(ok?('./year.html?y='+y):'#')+'">'+y+'</a>';
+    }
+    div.innerHTML='<h3>'+t+'</h3><div class="chips">'+chips+'</div>';
+    box.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
