@@ -110,6 +110,18 @@
         #wbCanvasWrap{display:none;}
         #wbCanvas{width:100%;height:100%;touch-action:none;cursor:crosshair;}
 
+        /* 下端の戻るボタン */
+        .home-nav{text-align:center;margin:56px auto 60px;}
+        .home-btn{
+            display:inline-flex;align-items:center;justify-content:center;gap:.4em;
+            padding:15px 36px;border-radius:999px;
+            background:var(--accent);color:#fff;
+            font-family:var(--font-body);font-weight:700;font-size:18px;
+            text-decoration:none;box-shadow:var(--shadow);
+            transition:background .18s ease, transform .12s ease;
+        }
+        .home-btn:hover{background:var(--accent-deep);transform:translateY(-2px);}
+
         /* モバイル調整 */
         @media(max-width:480px){
             #nayami-card{font-size:23px;padding:30px 22px;}
@@ -160,6 +172,10 @@
         <div id="wbCanvasWrap"><canvas id="wbCanvas"></canvas></div>
     </section>
     <!-- ▲▲▲ END main content ▲▲▲ -->
+
+    <nav class="home-nav" aria-label="もどる">
+        <a class="home-btn" href="../">素材集トップへもどる</a>
+    </nav>
 
     <script>
         /* ---------- 悩みカード設定 ---------- */
