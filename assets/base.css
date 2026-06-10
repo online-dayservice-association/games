@@ -60,6 +60,38 @@ a.card:hover{
 }
 .note b{color:var(--ink);font-weight:700;}
 
+/* --- ボタン --- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4em;
+  padding:14px 28px;border-radius:999px;
+  background:var(--accent);color:#fff;
+  font-family:var(--font-body);font-weight:700;font-size:18px;
+  text-decoration:none;white-space:nowrap;
+  box-shadow:var(--shadow);
+  transition:background .18s ease, transform .18s ease;
+}
+a.card:hover .btn{background:var(--accent-deep);}
+
+/* --- 注目カード（今すぐ遊べる） --- */
+.card.feature{
+  flex-direction:row;align-items:center;justify-content:space-between;gap:24px;
+  background:var(--accent-soft);border-color:#cfd6c2;
+  padding:28px 30px;min-height:auto;
+}
+.card.feature .name{font-size:24px;margin-bottom:8px;}
+.card.feature .desc{font-size:16px;}
+
+/* --- セクション見出し --- */
+.section-label{
+  display:flex;align-items:center;gap:14px;
+  margin:44px 0 18px;
+  color:var(--accent-deep);font-weight:700;font-size:14px;letter-spacing:.12em;
+}
+.section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+
+/* --- キーボード操作のフォーカス（アクセシビリティ） --- */
+a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px;}
+
 /* --- フッター --- */
 footer{
   margin:48px 0 60px;padding-top:26px;border-top:1px solid var(--line);

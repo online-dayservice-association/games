@@ -21,5 +21,11 @@ h1{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
   gap:var(--space);
-  margin:var(--space-lg) 0 8px;
+  margin:0 0 8px;
+}
+
+/* 注目カードは狭い画面で縦積みにする */
+@media (max-width:560px){
+  .card.feature{flex-direction:column;align-items:flex-start;}
+  .card.feature .btn{width:100%;}
 }
