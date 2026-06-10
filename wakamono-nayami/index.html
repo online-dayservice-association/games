@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>若者の悩みに答えよう</title>
+    <style>
+        /* ---- カラーパレット ---- */
+        :root{
+            --header:#1e40af; /* 濃い青に変更 */
+            --accent:#e11d48; /* 赤みがかった色に変更 */
+            --txt:#000000; /* 黒色を濃く */
+            --board:#ffffff; /* 白色を完全な白に */
+        }
+
+        *{box-sizing:border-box;}
+        html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;color:var(--txt);line-height:1.9;}
+        h1,h2{margin:0}
+
+        /* ---- Hero ---- */
+        #hero{padding:2rem 1rem;text-align:center;background:#fef3c7;}
+        #hero h1{font-size:clamp(32px,5vw,48px);font-weight:700;}
+        #hero .highlight{color:var(--accent);}
+        #hero .sub{margin-top:.6rem;font-size:clamp(18px,3.5vw,24px);}
+
+        /* ---- セクション共通 ---- */
+        /* 👇 共通マージン＆パディングだけ残す */
+        section{ margin:56px auto; padding:0 12px; }
+
+        /* 👇 既存 840px 制限は Hero / カードだけに適用 */
+        section:not(#whiteboardSec){ max-width:840px; }
+
+        /* 👇 ホワイトボードの幅を調整 */
+        #whiteboardSec{
+          max-width:840px;
+          width:100%;
+          padding-left:12px;
+          padding-right:12px;
+        }
+        h2{font-size:clamp(24px,4vw,32px);margin-bottom:24px}
+
+        /* ---- 悩みカード ---- */
+        #cat-area{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+        #cat-area button{padding:.5rem 1.1rem;font-size:20px;border:none;border-radius:.7rem;background:#f0f0f0;border:1px solid #d4d4d4;cursor:pointer}
+        #cat-area button.active{background:var(--accent);color:#fff}
+        #nayami-card{background:var(--board);padding:2rem;border-radius:1.2rem;font-size:28px;min-height:7rem;box-shadow:0 4px 12px rgba(0,0,0,.1);margin-top:16px;border:2px solid #e2e8f0;}
+        #next-btn{display:block;margin:24px auto 0;padding:1rem 2rem;font-size:24px;background:#f97316;color:#fff;font-weight:bold;border:none;border-radius:1rem;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+        .jump{display:block;text-align:center;margin-top:16px;font-size:22px;color:var(--accent);text-decoration:none}
+        .jump:hover{opacity:.8}
+
+        /* ---- ホワイトボード ---- */
+        #whiteboardSec{margin-top:80px}
+        #wbHeader{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem;background:#f8fafc;border:2px solid #e2e8f0;border-radius:8px 8px 0 0;margin-bottom:0}
+        #wbTitle{font-size:24px;font-weight:bold;color:var(--header)}
+        #wbControls{display:flex;gap:12px}
+        #wbControls button{padding:.6rem 1.2rem;font-size:20px;background:#ffffff;border:2px solid #94a3b8;border-radius:.5rem;cursor:pointer;font-weight:bold;color:var(--header)}
+        #wbControls button:hover{opacity:.85}
+        .wb-color{width:1.4rem;height:1.4rem;border-radius:50%;background:#000;border:2px solid #eee;cursor:pointer}
+        .wb-color.active{border-color:#fff;box-shadow:0 0 0 2px var(--accent)}
+        #wbEraser{background:var(--board);border:2px dashed #64748b;display:flex;align-items:center;justify-content:center;font-size:18px}
+
+        #wbEditor,#wbCanvasWrap{
+          width:100%;
+          height:75vh;
+          min-height:520px;
+          background:var(--board);
+          margin:0 auto;
+          border:2px solid #e2e8f0;
+          border-radius:0 0 8px 8px;
+          border-top:none;
+        }
+        #wbEditor{padding:1rem;font-size:32px;line-height:1.4;border:none;resize:none;outline:none}
+        #wbCanvasWrap{display:none}
+        #wbCanvas{width:100%;height:100%;touch-action:none;cursor:crosshair}
+
+
+        /* ---- モバイル調整 ---- */
+        @media(max-width:480px){
+            #nayami-card{font-size:24px}
+            #next-btn{font-size:22px}
+            #wbEditor{font-size:28px}
+            #wbEditor,#wbCanvasWrap{min-height:420px;width:100%;max-width:100%;}
+        }
+        
+        /* --- 強制 1 列レイアウト（幅に関係なく） --- */
+        @media (min-width:0px){
+            #mainArea{
+                display:block !important;     /* ← grid を打ち消し 1 列固定 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ▼▼▼ BEGIN main content ▼▼▼ -->
+    <section id="hero">
+        <h1>若者の悩みに答えよう</h1>
+        <p class="sub">あなたの経験が、誰かのヒントになります</p>
+    </section>
+
+    <div id="mainArea">
+        <section id="cardArea">
+            <h2>悩みカード</h2>
+            <div id="cat-area" aria-label="カテゴリ選択"></div>
+            <div id="nayami-card" role="region" aria-live="polite">読み込み中…</div>
+            <button id="next-btn" aria-label="次のお悩みを表示">次のお悩みを表示</button>
+        </section>
+
+        <section id="whiteboardSec">
+        <header id="wbHeader">
+            <div id="wbTitle">ホワイトボード</div>
+            <div id="wbControls">
+                <button id="wbModeBtn">お絵描きモード</button>
+                <button id="wbClearBtn">クリア</button>
+                <div id="wbPalette" class="hidden" style="display:none;">
+                    <span class="wb-color" data-color="#111827"></span>
+                    <span class="wb-color" data-color="#dc2626"></span>
+                    <span class="wb-color" data-color="#1d4ed8"></span>
+                    <span class="wb-color" data-color="#16a34a"></span>
+                    <span class="wb-color" id="wbEraser" title="消しゴム">✕</span>
+                </div>
+            </div>
+        </header>
+
+        <textarea id="wbEditor" placeholder="入力欄"></textarea>
+        <div id="wbCanvasWrap"><canvas id="wbCanvas"></canvas></div>
+    </section>
+    <!-- ▲▲▲ END main content ▲▲▲ -->
+
+    <script>
+        /* ---------- 悩みカード設定 ---------- */
+        const SHEET_URL="https://opensheet.elk.sh/1gXYVvFZUIBUbBxlo8aF6vM3UqSzmjS99UlGYGMkdeQE/Sheet1";
+        const CATEGORY_LIST=["すべて","学校","仕事","恋愛","家族","人間関係","将来","お金","健康"];
+        
+        const catWrap=document.getElementById("cat-area");
+        const nayamiCard=document.getElementById("nayami-card");
+        const nextBtn=document.getElementById("next-btn");
+        
+        let allData=[],curFilter="すべて";
+
+        /* ---------- カテゴリボタン生成 ---------- */
+        CATEGORY_LIST.forEach(cat=>{
+            const btn=document.createElement("button");
+            btn.textContent=cat;
+            btn.onclick=()=>{curFilter=cat;refreshButtons();showRandom();}
+            catWrap.appendChild(btn);
+        });
+        function refreshButtons(){
+            catWrap.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===curFilter));
+        }
+
+        /* ---------- データ取得 → 初期表示 ---------- */
+        fetch(SHEET_URL)
+            .then(r=>r.json())
+            .then(json=>{allData=json;refreshButtons();showRandom();})
+            .catch(()=>showMsg("データを読み込めませんでした"));
+
+        nextBtn.onclick=showRandom;
+
+        function showRandom(){
+            if(!allData.length){showMsg("読み込み中…");return;}
+            const pool=(curFilter==="すべて")?allData:allData.filter(r=>r["カテゴリ"]===curFilter);
+            if(!pool.length){showMsg("このカテゴリにはお題がありません");return;}
+            const pick=pool[Math.floor(Math.random()*pool.length)];
+            showMsg(pick["悩み本文"]);
+        }
+        function showMsg(txt){nayamiCard.textContent=txt;}
+
+        /* ---------- ホワイトボード ---------- */
+        const wbEditor=document.getElementById("wbEditor");
+        const wbCanvasWrap=document.getElementById("wbCanvasWrap");
+        const wbCanvas=document.getElementById("wbCanvas");
+        const wbCtx=wbCanvas.getContext("2d");
+        const wbModeBtn=document.getElementById("wbModeBtn");
+        const wbClearBtn=document.getElementById("wbClearBtn");
+        const wbPalette=document.getElementById("wbPalette");
+        const wbColors=wbPalette.querySelectorAll(".wb-color");
+
+        let wbDrawMode=false,wbDrawing=false,wbColor="#111827",wbErasing=false;
+
+        /* キャンバスリサイズ */
+        function wbResize(){wbCanvas.width=wbCanvas.offsetWidth;wbCanvas.height=wbCanvas.offsetHeight;}
+        window.addEventListener("resize",wbResize);
+
+        /* モード切替 */
+        wbModeBtn.onclick=()=>{
+            wbDrawMode=!wbDrawMode;
+            if(wbDrawMode){
+                wbEditor.classList.add("hidden");wbCanvasWrap.style.display="block";
+                // パレットを表示しないように修正
+                // wbPalette.classList.remove("hidden");
+                wbModeBtn.textContent="テキストモード";wbResize();
+            }else{
+                wbCanvasWrap.style.display="none";wbEditor.classList.remove("hidden");
+                wbPalette.classList.add("hidden");wbModeBtn.textContent="お絵描きモード";
+            }
+        };
+
+        /* クリア */
+        wbClearBtn.onclick=()=>{
+            if(wbDrawMode){
+                if(confirm("キャンバスを白紙にしますか？")) wbCtx.clearRect(0,0,wbCanvas.width,wbCanvas.height);
+            }else{
+                if(confirm("メモを完全に消去しますか？")){wbEditor.value="";wbEditor.focus();}
+            }
+        };
+
+        /* パレット */
+        wbColors.forEach(btn=>{
+            btn.onclick=()=>{
+                wbErasing=btn.id==="wbEraser";
+                wbColors.forEach(b=>b.classList.remove("active"));
+                btn.classList.add("active");
+                wbColor=btn.dataset.color||"#ffffff";
+                wbCtx.globalCompositeOperation=wbErasing?"destination-out":"source-over";
+            };
+        });
+        wbColors[0].classList.add("active");
+
+        /* 描画 */
+        wbCanvas.addEventListener("pointerdown",e=>{
+            wbDrawing=true;wbCtx.beginPath();wbCtx.moveTo(e.offsetX,e.offsetY);
+        });
+        wbCanvas.addEventListener("pointermove",e=>{
+            if(!wbDrawing) return;
+            wbCtx.lineWidth=wbErasing?30:6;wbCtx.lineCap="round";wbCtx.strokeStyle=wbColor;
+            wbCtx.lineTo(e.offsetX,e.offsetY);wbCtx.stroke();
+        });
+        ["pointerup","pointerleave","pointercancel"].forEach(evt=>wbCanvas.addEventListener(evt,()=>wbDrawing=false));
+    </script>
+</body>
+</html>
