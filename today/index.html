@@ -48,6 +48,26 @@ header{text-align:center;padding:40px 0 8px;}
 .qbox li{font-size:18px;padding:8px 0;}
 .qbox li+li{border-top:1px dashed var(--line);}
 
+/* 下端ナビ（前日・きょう・翌日／一覧・トップ） */
+.daynav{margin:46px 0 0;}
+.daynav-row{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.navbtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4em;
+  padding:14px 22px;border-radius:999px;
+  background:var(--card);border:1px solid var(--accent);color:var(--accent-deep);
+  font-family:var(--font-body);font-weight:700;font-size:17px;text-decoration:none;
+  transition:background .15s ease,color .15s ease,transform .12s ease;
+}
+.navbtn:hover{background:var(--accent);color:#fff;transform:translateY(-2px);}
+.navbtn.primary{background:var(--accent);color:#fff;box-shadow:var(--shadow);}
+.navbtn.primary:hover{background:var(--accent-deep);}
+.navbtn.sub{border-color:var(--line);color:var(--muted);font-weight:500;font-size:15px;padding:11px 20px;}
+.navbtn.sub:hover{background:var(--bg);color:var(--accent-deep);border-color:var(--accent);transform:none;}
+@media (max-width:560px){
+  .daynav-row{gap:8px;}
+  .navbtn{font-size:15px;padding:12px 16px;}
+}
+
 footer{margin:52px 0 60px;padding-top:24px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:14px;}
 footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
 </style>
@@ -55,7 +75,7 @@ footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid v
 <body>
 <div class="wrap">
   <a class="backlink" href="../">← 素材集にもどる</a>
-  <a class="backlink" href="./list.html" style="margin-left:14px;">日付からえらぶ</a>
+  <a class="backlink" href="./list.html" id="listLinkTop" style="margin-left:14px;">日付からえらぶ</a>
 
   <header>
     <div class="eyebrow">あそび・脳トレ素材集</div>
@@ -65,6 +85,18 @@ footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid v
 
   <main id="main"><p style="text-align:center;color:var(--muted);padding:40px 0;">読み込み中…</p></main>
 
+  <nav class="daynav" aria-label="日付の移動">
+    <div class="daynav-row">
+      <a class="navbtn" id="prevBtn" href="#">←</a>
+      <a class="navbtn primary" id="todayBtn" href="./" style="display:none;">きょうの日へ</a>
+      <a class="navbtn" id="nextBtn" href="#">→</a>
+    </div>
+    <div class="daynav-row">
+      <a class="navbtn sub" id="listLinkBottom" href="./list.html">日付一覧にもどる</a>
+      <a class="navbtn sub" href="../">素材集トップへ</a>
+    </div>
+  </nav>
+
   <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a></footer>
 </div>
 
@@ -73,8 +105,31 @@ const main=document.getElementById('main');
 const dateLabel=document.getElementById('dateLabel');
 const ORD=['ひとつめ','ふたつめ','みっつめ','よっつめ'];
 const d=new Date();
-// ?date=MM-DD があればその日を表示（確認用）。なければ今日。
-const key=(new URLSearchParams(location.search).get('date'))||(String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));
+const todayKey=String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+// ?date=MM-DD があればその日を表示。なければ今日。
+const key=(new URLSearchParams(location.search).get('date'))||todayKey;
+
+/* ---------- 日付ナビ（前日・きょう・翌日／一覧） ---------- */
+(function(){
+  const LEN=[31,29,31,30,31,30,31,31,30,31,30,31]; // 2/29を含む366日でひと回り
+  const order=[];
+  for(let m=1;m<=12;m++)for(let i=1;i<=LEN[m-1];i++)order.push(String(m).padStart(2,'0')+'-'+String(i).padStart(2,'0'));
+  const idx=order.indexOf(key);
+  const fmt=k=>parseInt(k.slice(0,2),10)+'月'+parseInt(k.slice(3),10)+'日';
+  if(idx>=0){
+    const prev=order[(idx+order.length-1)%order.length];
+    const next=order[(idx+1)%order.length];
+    const pb=document.getElementById('prevBtn'), nb=document.getElementById('nextBtn');
+    pb.href='./?date='+prev; pb.textContent='← '+fmt(prev);
+    nb.href='./?date='+next; nb.textContent=fmt(next)+' →';
+  }
+  // きょうを見ていないときだけ「きょうの日へ」を出す
+  if(key!==todayKey) document.getElementById('todayBtn').style.display='';
+  // 一覧リンクには「見ている月」を引き継ぐ
+  const m=parseInt(key.slice(0,2),10);
+  document.getElementById('listLinkTop').href='./list.html?m='+m;
+  document.getElementById('listLinkBottom').href='./list.html?m='+m;
+})();
 
 fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   const day=data[key];

@@ -102,7 +102,9 @@ const titleEl=document.getElementById('monthTitle');
 const now=new Date();
 const todayKey=String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
 let DATA=null;
-let current=now.getMonth()+1;
+// ?m=6 のように月指定があればその月を開く。なければ今月。
+const mParam=parseInt(new URLSearchParams(location.search).get('m'),10);
+let current=(mParam>=1&&mParam<=12)?mParam:now.getMonth()+1;
 
 for(let m=1;m<=12;m++){
   const b=document.createElement('button');
