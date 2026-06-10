@@ -24,14 +24,16 @@ header{text-align:center;padding:40px 0 8px;}
 .today-date{font-family:var(--font-head);font-weight:700;font-size:clamp(34px,6vw,52px);letter-spacing:.04em;margin:0;}
 .today-sub{margin-top:10px;color:var(--muted);font-size:clamp(16px,2.6vw,19px);}
 
-.section-label{display:flex;align-items:center;gap:16px;margin:44px 0 18px;}
-.section-label .label{font-family:var(--font-head);font-weight:700;font-size:22px;white-space:nowrap;letter-spacing:.03em;}
-.section-label .line{flex:1;height:1px;background:var(--line);}
+.block-label{display:flex;align-items:center;gap:14px;margin:52px 0 18px;}
+.block-label .num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:16px;flex:none;}
+.block-label .label{font-family:var(--font-head);font-weight:700;font-size:20px;white-space:nowrap;letter-spacing:.04em;}
+.block-label .line{flex:1;height:1px;background:var(--line);}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:16px;box-shadow:0 6px 18px rgba(86,96,73,.07);}
-.anniv .a-title{font-family:var(--font-head);font-weight:700;font-size:22px;margin:0 0 8px;color:var(--accent-deep);}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-bottom:14px;box-shadow:0 6px 18px rgba(86,96,73,.07);}
+.anniv .a-title{font-family:var(--font-head);font-weight:700;font-size:23px;margin:0 0 8px;color:var(--accent-deep);}
 .anniv .a-desc{font-size:17px;line-height:1.85;margin:0;}
 
+.cap{font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--accent-deep);margin:0 0 12px;}
 .quiz .q-text{font-family:var(--font-head);font-weight:700;font-size:20px;margin:0 0 16px;}
 .choices{display:flex;flex-direction:column;gap:10px;}
 .choice{font-family:var(--font-body);font-size:18px;text-align:left;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);cursor:pointer;transition:border-color .15s, background .15s;}
@@ -42,10 +44,11 @@ header{text-align:center;padding:40px 0 8px;}
 .explain{margin-top:14px;padding:14px 16px;background:var(--bg);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;font-size:16px;display:none;}
 .explain.show{display:block;}
 
-.q-list{list-style:none;padding:0;margin:0;}
-.q-list li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:12px;font-size:18px;}
+.qbox ul{list-style:none;margin:0;padding:0;}
+.qbox li{font-size:18px;padding:8px 0;}
+.qbox li+li{border-top:1px dashed var(--line);}
 
-footer{margin:48px 0 60px;padding-top:24px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:14px;}
+footer{margin:52px 0 60px;padding-top:24px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:14px;}
 footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
 </style>
 </head>
@@ -67,6 +70,7 @@ footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid v
 <script>
 const main=document.getElementById('main');
 const dateLabel=document.getElementById('dateLabel');
+const ORD=['ひとつめ','ふたつめ','みっつめ','よっつめ'];
 const d=new Date();
 const key=String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 
@@ -75,30 +79,29 @@ fetch('./data.json').then(r=>r.json()).then(data=>{
   dateLabel.textContent=(day&&day.date_label)||((d.getMonth()+1)+'月'+d.getDate()+'日');
   if(!day){ main.innerHTML='<p style="text-align:center;color:var(--muted);padding:40px 0;">本日のぶんは準備中です。</p>'; return; }
   let html='';
-  html+=section('今日は何の日');
-  day.anniversaries.forEach(a=>{ html+='<div class="card anniv"><p class="a-title">'+esc(a.title)+'</p><p class="a-desc">'+esc(a.desc)+'</p></div>'; });
-  html+=section('今日のクイズ');
-  day.quizzes.forEach((q,qi)=>{
+  day.topics.forEach((t,ti)=>{
+    html+='<div class="block-label"><span class="num">'+(ti+1)+'</span><span class="label">'+(ORD[ti]||('その'+(ti+1)))+'</span><span class="line"></span></div>';
+    html+='<div class="card anniv"><p class="a-title">'+esc(t.title)+'</p><p class="a-desc">'+esc(t.desc)+'</p></div>';
+    const q=t.quiz;
     let ch='';
-    q.choices.forEach((c,ci)=>{ ch+='<button class="choice" data-q="'+qi+'" data-c="'+ci+'">'+(ci+1)+'. '+esc(c)+'</button>'; });
-    html+='<div class="card quiz"><p class="q-text">Q'+(qi+1)+'.　'+esc(q.q)+'</p><div class="choices">'+ch+'</div><div class="explain" id="ex'+qi+'"></div></div>';
+    q.choices.forEach((c,ci)=>{ ch+='<button class="choice" data-t="'+ti+'" data-c="'+ci+'">'+(ci+1)+'. '+esc(c)+'</button>'; });
+    html+='<div class="card quiz"><p class="cap">クイズ</p><p class="q-text">'+esc(q.q)+'</p><div class="choices">'+ch+'</div><div class="explain" id="ex'+ti+'"></div></div>';
+    html+='<div class="card qbox"><p class="cap">お話のきっかけ</p><ul>'+t.questions.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>';
   });
-  html+=section('今日の質問');
-  html+='<ul class="q-list">'+day.questions.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
   main.innerHTML=html;
-  day.quizzes.forEach((q,qi)=>{
-    const btns=main.querySelectorAll('.choice[data-q="'+qi+'"]');
+  day.topics.forEach((t,ti)=>{
+    const q=t.quiz;
+    const btns=main.querySelectorAll('.choice[data-t="'+ti+'"]');
     btns.forEach(b=>{ b.onclick=()=>{
       btns.forEach(x=>{ x.disabled=true; if(+x.dataset.c===q.answer)x.classList.add('correct'); });
       if(+b.dataset.c!==q.answer)b.classList.add('wrong');
-      const ex=document.getElementById('ex'+qi);
+      const ex=document.getElementById('ex'+ti);
       ex.textContent='正解は '+(q.answer+1)+'.　'+q.explain;
       ex.classList.add('show');
     }; });
   });
 });
 
-function section(t){return '<div class="section-label"><span class="label">'+t+'</span><span class="line"></span></div>';}
 function esc(s){return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));}
 </script>
 </body>
