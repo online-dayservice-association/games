@@ -1,0 +1,31 @@
+name: Validate data JSON
+
+# data.json を変更して push したとき、JSONとして壊れていないか自動検査する安全網。
+# 壊れていれば赤いバツ印と通知が出る（＝間違いに気づける）。
+on:
+  push:
+    paths:
+      - "**/data.json"
+  pull_request:
+    paths:
+      - "**/data.json"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: すべての data.json を検査
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r f; do
+            if python3 -c "import json,sys; json.load(open(sys.argv[1], encoding='utf-8'))" "$f"; then
+              echo "OK   : $f"
+            else
+              echo "壊れています: $f"
+              fail=1
+            fi
+          done < <(find . -name 'data.json' -not -path './.git/*')
+          exit $fail

@@ -128,8 +128,10 @@
 
     <script>
         /* ---------- 悩みカード設定 ---------- */
-        const SHEET_URL="https://opensheet.elk.sh/1gXYVvFZUIBUbBxlo8aF6vM3UqSzmjS99UlGYGMkdeQE/Sheet1";
-        const CATEGORY_LIST=["すべて","学校","仕事","恋愛","家族","人間関係","将来","お金","健康"];
+        /* データはこのフォルダ内の data.json から読み込む（外部サービス非依存）。
+           お題の編集は data.json を直接編集、または Claude に依頼。
+           カテゴリはデータから自動生成するので、ここで決め打ちしない。 */
+        const DATA_URL="./data.json";
         
         const catWrap=document.getElementById("cat-area");
         const nayamiCard=document.getElementById("nayami-card");
@@ -137,21 +139,27 @@
         
         let allData=[],curFilter="すべて";
 
-        /* ---------- カテゴリボタン生成 ---------- */
-        CATEGORY_LIST.forEach(cat=>{
-            const btn=document.createElement("button");
-            btn.textContent=cat;
-            btn.onclick=()=>{curFilter=cat;refreshButtons();showRandom();}
-            catWrap.appendChild(btn);
-        });
         function refreshButtons(){
             catWrap.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.textContent===curFilter));
         }
 
+        /* ---------- カテゴリボタン生成（データから自動生成） ---------- */
+        function buildCategories(){
+            const cats=["すべて",...new Set(allData.map(r=>r["カテゴリ"]).filter(Boolean))];
+            catWrap.innerHTML="";
+            cats.forEach(cat=>{
+                const btn=document.createElement("button");
+                btn.textContent=cat;
+                btn.onclick=()=>{curFilter=cat;refreshButtons();showRandom();};
+                catWrap.appendChild(btn);
+            });
+            refreshButtons();
+        }
+
         /* ---------- データ取得 → 初期表示 ---------- */
-        fetch(SHEET_URL)
+        fetch(DATA_URL)
             .then(r=>r.json())
-            .then(json=>{allData=json;refreshButtons();showRandom();})
+            .then(json=>{allData=json;buildCategories();showRandom();})
             .catch(()=>showMsg("データを読み込めませんでした"));
 
         nextBtn.onclick=showRandom;
