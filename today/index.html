@@ -84,8 +84,11 @@ fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(data=>{
     html+='<div class="block-label"><span class="num">'+(ti+1)+'</span><span class="label">'+(ORD[ti]||('その'+(ti+1)))+'</span><span class="line"></span></div>';
     html+='<div class="card anniv"><p class="a-title">'+esc(t.title)+'</p><p class="a-desc">'+esc(t.desc)+'</p></div>';
     const q=t.quiz;
+    const order=q.choices.map((_,i)=>i);
+    for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const tmp=order[i];order[i]=order[j];order[j]=tmp;}
+    t._correctPos=order.indexOf(q.answer);
     let ch='';
-    q.choices.forEach((c,ci)=>{ ch+='<button class="choice" data-t="'+ti+'" data-c="'+ci+'">'+(ci+1)+'. '+esc(c)+'</button>'; });
+    order.forEach((oi,pos)=>{ ch+='<button class="choice" data-t="'+ti+'" data-pos="'+pos+'">'+(pos+1)+'. '+esc(q.choices[oi])+'</button>'; });
     html+='<div class="card quiz"><p class="cap">クイズ</p><p class="q-text">'+esc(q.q)+'</p><div class="choices">'+ch+'</div><div class="explain" id="ex'+ti+'"></div></div>';
     html+='<div class="card qbox"><p class="cap">お話のきっかけ</p><ul>'+t.questions.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>';
   });
@@ -94,10 +97,10 @@ fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(data=>{
     const q=t.quiz;
     const btns=main.querySelectorAll('.choice[data-t="'+ti+'"]');
     btns.forEach(b=>{ b.onclick=()=>{
-      btns.forEach(x=>{ x.disabled=true; if(+x.dataset.c===q.answer)x.classList.add('correct'); });
-      if(+b.dataset.c!==q.answer)b.classList.add('wrong');
+      btns.forEach(x=>{ x.disabled=true; if(+x.dataset.pos===t._correctPos)x.classList.add('correct'); });
+      if(+b.dataset.pos!==t._correctPos)b.classList.add('wrong');
       const ex=document.getElementById('ex'+ti);
-      ex.textContent='正解は '+(q.answer+1)+'.　'+q.explain;
+      ex.textContent='正解は '+(t._correctPos+1)+'.　'+q.explain;
       ex.classList.add('show');
     }; });
   });
