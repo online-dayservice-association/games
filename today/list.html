@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日付一覧｜今日は何の日？｜あそび・脳トレ素材集</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0 0 6px;}
+
+/* 今日へのショートカット */
+.today-btn{
+  display:inline-flex;align-items:center;gap:.5em;margin:14px auto 0;
+  padding:13px 30px;border-radius:999px;background:var(--accent);color:#fff;
+  font-weight:700;font-size:17px;text-decoration:none;box-shadow:var(--shadow);
+}
+.today-btn:hover{background:var(--accent-deep);}
+
+/* 月えらび */
+.months{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:8px;
+  margin:30px 0 8px;
+}
+@media (max-width:560px){ .months{grid-template-columns:repeat(4,1fr);} }
+.month-btn{
+  font-family:var(--font-body);font-size:17px;font-weight:700;
+  padding:12px 0;border:1px solid var(--line);border-radius:12px;
+  background:var(--card);color:var(--ink);cursor:pointer;
+  transition:border-color .15s, background .15s, color .15s;
+}
+.month-btn:hover{border-color:var(--accent);}
+.month-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* 日リスト */
+.section-label{display:flex;align-items:center;gap:16px;margin:26px 0 14px;}
+.section-label .label{font-family:var(--font-head);font-weight:700;font-size:22px;white-space:nowrap;letter-spacing:.04em;}
+.section-label .line{flex:1;height:1px;background:var(--line);}
+
+.daylist{display:flex;flex-direction:column;gap:8px;margin-bottom:40px;}
+.day{
+  display:flex;align-items:center;gap:16px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px 16px;text-decoration:none;color:inherit;
+  transition:transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+.day:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:var(--shadow);}
+.day .num{
+  flex:none;width:64px;text-align:center;
+  font-family:var(--font-head);font-weight:700;font-size:20px;color:var(--accent-deep);
+  border-right:1px solid var(--line);padding-right:14px;
+}
+.day .topics{font-size:16px;line-height:1.6;}
+.day .topics .t2{color:var(--muted);}
+.day.today-row{background:#edf0e6;border-color:var(--accent);}
+.day.today-row .num::after{content:"きょう";display:block;font-family:var(--font-body);font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:999px;padding:1px 8px;margin-top:3px;}
+
+footer{margin:24px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+  <a class="backlink" href="./">きょうのページへ</a>
+
+  <header>
+    <div class="eyebrow">今日は何の日？</div>
+    <h1>日付からえらぶ</h1>
+    <p class="lead">月をえらんで、見たい日を押してください。全366日そろっています。</p>
+    <a class="today-btn" href="./">きょうの「何の日」をひらく</a>
+  </header>
+
+  <main>
+    <div class="months" id="months" aria-label="月をえらぶ"></div>
+    <div class="section-label"><span class="label" id="monthTitle">　</span><span class="line"></span></div>
+    <div class="daylist" id="daylist"><p style="color:var(--muted);text-align:center;">読み込み中…</p></div>
+  </main>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a></footer>
+</div>
+
+<script>
+const monthsEl=document.getElementById('months');
+const dayEl=document.getElementById('daylist');
+const titleEl=document.getElementById('monthTitle');
+const now=new Date();
+const todayKey=String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+let DATA=null;
+let current=now.getMonth()+1;
+
+for(let m=1;m<=12;m++){
+  const b=document.createElement('button');
+  b.className='month-btn'; b.textContent=m+'月';
+  b.onclick=()=>{current=m;render();};
+  monthsEl.appendChild(b);
+}
+
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(d=>{DATA=d;render();});
+
+function render(){
+  [...monthsEl.children].forEach((b,i)=>b.classList.toggle('active',i+1===current));
+  titleEl.textContent=current+'月';
+  const mm=String(current).padStart(2,'0');
+  const keys=Object.keys(DATA).filter(k=>k.startsWith(mm+'-')).sort();
+  let html='';
+  keys.forEach(k=>{
+    const day=DATA[k];
+    const t1=day.topics[0]?day.topics[0].title:'';
+    const t2=day.topics[1]?day.topics[1].title:'';
+    const isToday=(k===todayKey);
+    html+='<a class="day'+(isToday?' today-row':'')+'" href="./?date='+k+'">'
+        + '<span class="num">'+parseInt(k.slice(3),10)+'日</span>'
+        + '<span class="topics">'+esc(t1)+'<br><span class="t2">'+esc(t2)+'</span></span>'
+        + '</a>';
+  });
+  dayEl.innerHTML=html||'<p style="color:var(--muted);text-align:center;">この月のデータがありません。</p>';
+  if(current===now.getMonth()+1){
+    const t=dayEl.querySelector('.today-row');
+    if(t) setTimeout(()=>t.scrollIntoView({block:'center',behavior:'smooth'}),100);
+  }else{
+    window.scrollTo({top:0});
+  }
+}
+function esc(s){return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));}
+</script>
+</body>
+</html>
