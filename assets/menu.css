@@ -1,0 +1,25 @@
+/* =========================================================
+   menu.css — メニュー画面（index.html）に固有のレイアウト
+   ヘッダーとカードのグリッドだけをここに置く。共通部品は base.css。
+   ========================================================= */
+
+header{padding:56px 0 8px;text-align:center;}
+.eyebrow{
+  font-size:var(--fz-small);letter-spacing:.18em;
+  color:var(--accent-deep);font-weight:500;margin-bottom:14px;
+}
+h1{
+  font-family:var(--font-head);font-weight:700;
+  font-size:var(--fz-title);margin:0 0 18px;letter-spacing:.04em;
+}
+.lead{
+  max-width:640px;margin:0 auto;color:var(--muted);
+  font-size:var(--fz-lead);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:var(--space);
+  margin:var(--space-lg) 0 8px;
+}

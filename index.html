@@ -13,98 +13,15 @@
 <meta property="og:url" content="https://game.onlinedayservice.com/">
 <meta name="twitter:card" content="summary">
 
+<!-- フォント -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#f7f3ec;        /* 生成りの白 */
-  --ink:#33312b;
-  --muted:#7a766c;
-  --accent:#6f7d5e;    /* くすんだ緑 */
-  --accent-deep:#566049;
-  --line:#ddd4c4;
-  --card:#fffdf8;
-}
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;}
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:"Zen Kaku Gothic New",system-ui,-apple-system,"Segoe UI",sans-serif;
-  line-height:1.9;
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:980px;margin:0 auto;padding:0 20px;}
-
-/* ヘッダー */
-header{padding:56px 0 8px;text-align:center;}
-.eyebrow{
-  font-size:13px;letter-spacing:.18em;color:var(--accent-deep);
-  font-weight:500;margin-bottom:14px;
-}
-h1{
-  font-family:"Zen Old Mincho",serif;
-  font-weight:700;
-  font-size:clamp(28px,5vw,40px);
-  margin:0 0 18px;letter-spacing:.04em;
-}
-.lead{
-  max-width:640px;margin:0 auto;color:var(--muted);
-  font-size:clamp(15px,2.4vw,17px);
-}
-.rule{width:48px;height:2px;background:var(--accent);margin:28px auto 0;border-radius:2px;}
-
-/* グリッド */
-.grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-  gap:16px;margin:40px 0 8px;
-}
-.card{
-  display:flex;flex-direction:column;
-  background:var(--card);border:1px solid var(--line);
-  border-radius:14px;padding:20px 20px 18px;
-  text-decoration:none;color:inherit;
-  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  position:relative;min-height:128px;
-}
-a.card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 24px rgba(86,96,73,.14);
-  border-color:var(--accent);
-}
-.card .name{
-  font-family:"Zen Old Mincho",serif;font-weight:700;
-  font-size:18px;margin-bottom:6px;letter-spacing:.02em;
-}
-.card .desc{font-size:13.5px;color:var(--muted);line-height:1.7;}
-.badge{
-  align-self:flex-start;margin-top:auto;padding-top:12px;
-  font-size:12px;font-weight:500;letter-spacing:.04em;
-}
-.card.ready .badge{color:var(--accent-deep);}
-.card.soon{opacity:.62;cursor:default;}
-.card.soon .badge{color:var(--muted);}
-.card.ready::after{
-  content:"";position:absolute;top:16px;right:16px;
-  width:8px;height:8px;border-radius:50%;background:var(--accent);
-}
-
-/* 注意書き・フッター */
-.note{
-  margin:34px 0 0;padding:20px 22px;
-  background:#fffdf8;border:1px solid var(--line);border-radius:12px;
-  font-size:14px;color:var(--muted);
-}
-.note b{color:var(--ink);font-weight:700;}
-footer{
-  margin:48px 0 60px;padding-top:26px;border-top:1px solid var(--line);
-  text-align:center;color:var(--muted);font-size:13.5px;
-}
-footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
-footer a:hover{border-color:var(--accent);}
-</style>
+<!-- スタイル（見た目はここから。順番：基準値 → 土台 → ページ固有） -->
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/menu.css">
 </head>
 <body>
 <div class="wrap">

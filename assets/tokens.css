@@ -1,0 +1,37 @@
+/* =========================================================
+   tokens.css — デザインの「基準値」= 唯一の真実（Single Source of Truth）
+   配色・フォント・文字サイズ・余白をここ1か所に集約。
+   メニューも各ゲームもこのファイルを参照する。
+   Claude Design はここを読んでデザインシステムを組み立てる。
+   ※高齢の方に画面共有で見せる前提のため、文字は大きめ・高コントラストを基準にする。
+   ========================================================= */
+:root{
+  /* --- 配色（協会サイトと統一：生成りの白 × くすんだ緑） --- */
+  --bg:#f7f3ec;          /* 背景：生成りの白 */
+  --ink:#33312b;         /* 文字：濃い墨 */
+  --muted:#7a766c;       /* 補助テキスト */
+  --accent:#6f7d5e;      /* アクセント：くすんだ緑 */
+  --accent-deep:#566049; /* 濃いアクセント */
+  --line:#ddd4c4;        /* 罫線・枠 */
+  --card:#fffdf8;        /* カード背景 */
+  --shadow:0 10px 24px rgba(86,96,73,.14);
+
+  /* --- フォント --- */
+  --font-head:"Zen Old Mincho",serif;                                  /* 見出し：明朝 */
+  --font-body:"Zen Kaku Gothic New",system-ui,-apple-system,"Segoe UI",sans-serif; /* 本文：角ゴシック */
+
+  /* --- 文字サイズ（大きめ基準） --- */
+  --fz-title:clamp(28px,5vw,40px);
+  --fz-lead:clamp(16px,2.6vw,19px);
+  --fz-base:17px;
+  --fz-card-title:20px;
+  --fz-card-desc:15px;
+  --fz-small:13px;
+  --lh:1.9;
+
+  /* --- 余白・角丸・最大幅 --- */
+  --space:16px;
+  --space-lg:40px;
+  --radius:14px;
+  --maxw:980px;
+}
