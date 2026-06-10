@@ -74,7 +74,7 @@ const ORD=['ひとつめ','ふたつめ','みっつめ','よっつめ'];
 const d=new Date();
 const key=String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 
-fetch('./data.json').then(r=>r.json()).then(data=>{
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   const day=data[key];
   dateLabel.textContent=(day&&day.date_label)||((d.getMonth()+1)+'月'+d.getDate()+'日');
   if(!day){ main.innerHTML='<p style="text-align:center;color:var(--muted);padding:40px 0;">本日のぶんは準備中です。</p>'; return; }
