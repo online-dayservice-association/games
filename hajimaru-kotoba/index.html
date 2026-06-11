@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>◯から始まる言葉｜あそび・脳トレ素材集</title>
+<meta name="description" content="お題の文字で始まる言葉を、みんなで出し合うあそび。オンラインデイサービス協会の無料素材集。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0;}
+
+/* お題カード */
+.stage{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);text-align:center;
+  margin:28px auto 0;max-width:640px;
+  padding:clamp(28px,6vw,52px) 20px;
+}
+.char{
+  font-family:var(--font-head);font-weight:700;color:var(--accent-deep);
+  font-size:clamp(88px,22vw,150px);line-height:1.15;display:block;
+}
+.char.spin{color:var(--ink);}
+.suffix{font-family:var(--font-head);font-weight:700;font-size:clamp(20px,4.5vw,30px);letter-spacing:.06em;display:block;margin-top:6px;}
+.cheer{min-height:1.8em;color:var(--muted);font-size:16px;margin:14px 0 0;}
+
+/* ボタン */
+.controls{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 8px;}
+.btn{
+  font-family:var(--font-body);font-weight:700;font-size:19px;cursor:pointer;
+  padding:15px 44px;border-radius:999px;border:none;
+  background:var(--accent);color:#fff;box-shadow:var(--shadow);
+  transition:background .15s, opacity .15s, transform .12s;
+}
+.btn:hover{background:var(--accent-deep);}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);}
+.btn.ghost:hover{border-color:var(--accent);background:var(--card);}
+
+/* あそびかた */
+.howto{
+  max-width:640px;margin:34px auto 0;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:20px 24px;
+  font-size:15.5px;
+}
+.howto b{font-family:var(--font-head);font-size:17px;display:block;margin-bottom:6px;letter-spacing:.04em;}
+.howto ul{margin:0;padding-left:1.3em;}
+.howto li{margin:4px 0;}
+
+footer{margin:44px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+
+  <header>
+    <div class="eyebrow">あそび・脳トレ素材集</div>
+    <h1>◯から始まる言葉</h1>
+    <p class="lead">出てきた文字で始まる言葉を、みんなで声に出して出し合いましょう。</p>
+  </header>
+
+  <main>
+    <div class="stage" aria-live="polite">
+      <span class="char" id="char">◯</span>
+      <span class="suffix">から始まる言葉は？</span>
+      <p class="cheer" id="cheer">「用意スタート」を押してください。</p>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="startBtn">用意スタート</button>
+      <button class="btn" id="stopBtn" disabled>ストップ</button>
+    </div>
+
+    <div class="howto">
+      <b>あそびかた</b>
+      <ul>
+        <li>「用意スタート」で文字がまわります。よいところで「ストップ」。</li>
+        <li>出た文字で始まる言葉を、思いつくだけ声に出してみましょう。</li>
+        <li>人の名前、食べもの、地名など、お題をしぼっても楽しめます。</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a><br><span style="display:inline-block;margin-top:10px;">この素材集は、オンラインデイサービスの現場で使われています。<br>サービスを利用してみたい方は <a href="https://www.onlinedayservice.com/#operators">導入事業者のご紹介</a> へ</span></footer>
+</div>
+
+<script>
+// ぢ・づは始まる言葉がほぼ無いため除外。わ行は「わ」のみ収録。
+const CHARS=[
+ 'あ','い','う','え','お',
+ 'か','き','く','け','こ',
+ 'さ','し','す','せ','そ',
+ 'た','ち','つ','て','と',
+ 'な','に','ぬ','ね','の',
+ 'は','ひ','ふ','へ','ほ',
+ 'ま','み','む','め','も',
+ 'や','ゆ','よ',
+ 'ら','り','る','れ','ろ',
+ 'わ',
+ 'が','ぎ','ぐ','げ','ご',
+ 'ざ','じ','ず','ぜ','ぞ',
+ 'だ','で','ど',
+ 'ば','び','ぶ','べ','ぼ',
+ 'ぱ','ぴ','ぷ','ぺ','ぽ'
+];
+const charEl=document.getElementById('char');
+const cheerEl=document.getElementById('cheer');
+const startBtn=document.getElementById('startBtn');
+const stopBtn=document.getElementById('stopBtn');
+let timer=null,stopping=false,lastResult='';
+
+function pick(){return CHARS[Math.floor(Math.random()*CHARS.length)];}
+function tick(){charEl.textContent=pick();}
+
+startBtn.addEventListener('click',()=>{
+  if(timer)clearInterval(timer);
+  stopping=false;
+  charEl.classList.add('spin');
+  cheerEl.textContent='よいところで「ストップ」！';
+  timer=setInterval(tick,60);
+  startBtn.disabled=true;
+  stopBtn.disabled=false;
+});
+
+stopBtn.addEventListener('click',()=>{
+  if(stopping)return;
+  stopping=true;
+  stopBtn.disabled=true;
+  clearInterval(timer);
+  // 約0.6秒でピタッと減速
+  const steps=[90,130,180,240];
+  let i=0;
+  (function slow(){
+    if(i<steps.length){
+      tick();
+      setTimeout(slow,steps[i++]);
+    }else{
+      let final=pick();
+      if(final===lastResult)final=pick();
+      lastResult=final;
+      charEl.textContent=final;
+      charEl.classList.remove('spin');
+      cheerEl.textContent='「'+final+'」で始まる言葉、いくつ出るでしょう？';
+      startBtn.textContent='もう一回まわす';
+      startBtn.disabled=false;
+      stopping=false;
+    }
+  })();
+});
+</script>
+</body>
+</html>
