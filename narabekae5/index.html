@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>並べ替え5文字｜あそび・脳トレ素材集</title>
+<meta name="description" content="バラバラになった文字を並べ替えて、もとの言葉を当てるあそび。オンラインデイサービス協会の無料素材集。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0;}
+
+/* 問題カード */
+.stage{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);text-align:center;
+  margin:28px auto 0;max-width:680px;
+  padding:clamp(26px,5.5vw,46px) 14px;
+}
+.tiles{display:flex;justify-content:center;gap:clamp(6px,1.6vw,12px);flex-wrap:nowrap;}
+.tile{
+  font-family:var(--font-head);font-weight:700;
+  font-size:var(--tile-font,clamp(34px,9.5vw,62px));
+  line-height:1;
+  padding:.32em .18em;
+  background:var(--bg);border:2px solid var(--line);border-radius:12px;
+  min-width:1.55em;
+}
+.q-label{color:var(--muted);font-size:15px;margin:0 0 16px;}
+
+/* 答え */
+.answer{display:none;margin-top:26px;padding-top:22px;border-top:1px dashed var(--line);}
+.answer.show{display:block;}
+.answer .a-label{font-size:14px;color:var(--muted);letter-spacing:.14em;}
+.answer .a-hira{font-family:var(--font-head);font-weight:700;font-size:clamp(34px,8vw,54px);color:var(--accent-deep);line-height:1.4;}
+.answer .a-kanji{font-size:clamp(18px,4vw,24px);color:var(--ink);}
+
+/* ボタン */
+.controls{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 8px;}
+.btn{
+  font-family:var(--font-body);font-weight:700;font-size:19px;cursor:pointer;
+  padding:15px 40px;border-radius:999px;border:none;
+  background:var(--accent);color:#fff;box-shadow:var(--shadow);
+  transition:background .15s, opacity .15s;
+}
+.btn:hover{background:var(--accent-deep);}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);}
+.btn.ghost:hover{border-color:var(--accent);background:var(--card);}
+
+/* あそびかた */
+.howto{
+  max-width:680px;margin:34px auto 0;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:20px 24px;
+  font-size:15.5px;
+}
+.howto b{font-family:var(--font-head);font-size:17px;display:block;margin-bottom:6px;letter-spacing:.04em;}
+.howto ul{margin:0;padding-left:1.3em;}
+.howto li{margin:4px 0;}
+
+footer{margin:44px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+
+  <header>
+    <div class="eyebrow">あそび・脳トレ素材集</div>
+    <h1>並べ替え5文字</h1>
+    <p class="lead">バラバラになった5文字を並べ替えて、もとの言葉を当てましょう。</p>
+  </header>
+
+  <main>
+    <div class="stage" aria-live="polite">
+      <p class="q-label">この文字を並べ替えると……？</p>
+      <div class="tiles" id="tiles"><span class="tile">…</span></div>
+      <div class="answer" id="answer">
+        <div class="a-label">こたえ</div>
+        <div class="a-hira" id="aHira"></div>
+        <div class="a-kanji" id="aKanji"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="showBtn">答えを見る</button>
+      <button class="btn ghost" id="nextBtn">次の問題</button>
+    </div>
+
+    <div class="howto">
+      <b>あそびかた</b>
+      <ul>
+        <li>声に出して読みながら、文字を入れ替えてみましょう。</li>
+        <li>思いついた人から、口に出してどうぞ。早い者勝ちにしなくても大丈夫。</li>
+        <li>むずかしいときは「最初の1文字はこれ」とヒントを出すのもおすすめです。</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a><br><span style="display:inline-block;margin-top:10px;">この素材集は、オンラインデイサービスの現場で使われています。<br>サービスを利用してみたい方は <a href="https://www.onlinedayservice.com/#operators">導入事業者のご紹介</a> へ</span></footer>
+</div>
+
+<script>
+const tilesEl=document.getElementById('tiles');
+const answerEl=document.getElementById('answer');
+const aHira=document.getElementById('aHira');
+const aKanji=document.getElementById('aKanji');
+const showBtn=document.getElementById('showBtn');
+const nextBtn=document.getElementById('nextBtn');
+let WORDS=[],current=null,lastIdx=-1;
+
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+  WORDS=d.words;
+  next();
+});
+
+function hasRun(orig,shuf,len){
+  for(let i=0;i<=orig.length-len;i++){
+    if(shuf.includes(orig.slice(i,i+len)))return true;
+  }
+  return false;
+}
+function shuffleWord(w){
+  let s='',guard=0;
+  do{
+    const a=w.split('');
+    for(let i=a.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    s=a.join('');
+    if(++guard>50)break;
+  }while(s===w||hasRun(w,s,3));
+  return s;
+}
+function next(){
+  let idx;
+  do{idx=Math.floor(Math.random()*WORDS.length);}while(idx===lastIdx&&WORDS.length>1);
+  lastIdx=idx;
+  current=WORDS[idx];
+  const shuf=shuffleWord(current.hiragana);
+  tilesEl.innerHTML='';
+  for(const ch of shuf){
+    const t=document.createElement('span');
+    t.className='tile';t.textContent=ch;
+    tilesEl.appendChild(t);
+  }
+  aHira.textContent=current.hiragana;
+  aKanji.textContent='（'+current.kanji+'）';
+  answerEl.classList.remove('show');
+  showBtn.disabled=false;
+}
+showBtn.addEventListener('click',()=>{
+  if(!current)return;
+  answerEl.classList.add('show');
+  showBtn.disabled=true;
+});
+nextBtn.addEventListener('click',()=>{if(WORDS.length)next();});
+</script>
+</body>
+</html>
