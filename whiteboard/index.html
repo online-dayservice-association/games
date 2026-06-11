@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ホワイトボード｜あそび・脳トレ素材集</title>
+<meta name="description" content="画面共有でみんなに見せる、大きな文字のメモとお絵描きボード。オンラインデイサービス協会の無料素材集。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px;}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+.topbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 0 12px;}
+.backlink{color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);white-space:nowrap;}
+.backlink:hover{border-color:var(--accent);}
+.t-title{font-family:var(--font-head);font-weight:700;font-size:20px;letter-spacing:.06em;margin-right:auto;}
+
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.btn{
+  font-family:var(--font-body);font-weight:700;font-size:15px;cursor:pointer;
+  padding:9px 18px;border-radius:999px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);
+}
+.btn:hover{border-color:var(--accent);}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn.primary:hover{background:var(--accent-deep);}
+
+#palette{display:none;align-items:center;gap:8px;}
+#palette.show{display:flex;}
+.color-btn{width:30px;height:30px;border-radius:50%;border:3px solid var(--card);cursor:pointer;padding:0;box-shadow:0 0 0 1px var(--line);}
+.color-btn.active{box-shadow:0 0 0 3px var(--accent);}
+#eraser{background:var(--card);font-size:16px;border:2px dashed var(--muted);width:34px;height:34px;border-radius:8px;cursor:pointer;}
+#eraser.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent);}
+
+.board-area{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;height:76vh;min-height:420px;
+}
+#editor{
+  width:100%;height:100%;border:none;outline:none;resize:none;
+  padding:24px;background:transparent;color:var(--ink);
+  font-family:var(--font-body);font-weight:700;font-size:clamp(40px,6vw,72px);line-height:1.5;
+}
+#boardWrap{display:none;width:100%;height:100%;}
+#board{width:100%;height:100%;touch-action:none;cursor:crosshair;display:block;}
+
+footer{margin:20px 0 36px;padding-top:16px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="backlink" href="../">← 素材集にもどる</a>
+    <span class="t-title">ホワイトボード</span>
+    <div class="controls">
+      <div id="palette">
+        <button class="color-btn active" data-color="#3b4032" style="background:#3b4032;" aria-label="黒"></button>
+        <button class="color-btn" data-color="#a8442c" style="background:#a8442c;" aria-label="赤"></button>
+        <button class="color-btn" data-color="#2c5aa8" style="background:#2c5aa8;" aria-label="青"></button>
+        <button class="color-btn" data-color="#6f7d5e" style="background:#6f7d5e;" aria-label="緑"></button>
+        <button id="eraser" title="消しゴム" aria-label="消しゴム">⌫</button>
+      </div>
+      <button class="btn primary" id="modeBtn">お絵描きモード</button>
+      <button class="btn" id="clearBtn">ぜんぶ消す</button>
+    </div>
+  </div>
+
+  <div class="board-area">
+    <textarea id="editor" placeholder="ここに大きな字でメモできます"></textarea>
+    <div id="boardWrap"><canvas id="board"></canvas></div>
+  </div>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a><br><span style="display:inline-block;margin-top:10px;">この素材集は、オンラインデイサービスの現場で使われています。<br>サービスを利用してみたい方は <a href="https://www.onlinedayservice.com/#operators">導入事業者のご紹介</a> へ</span></footer>
+</div>
+
+<script>
+const editor=document.getElementById('editor');
+const boardWrap=document.getElementById('boardWrap');
+const board=document.getElementById('board');
+const ctx=board.getContext('2d');
+const modeBtn=document.getElementById('modeBtn');
+const clearBtn=document.getElementById('clearBtn');
+const palette=document.getElementById('palette');
+const colorBtns=palette.querySelectorAll('.color-btn');
+const eraserBtn=document.getElementById('eraser');
+
+let drawingMode=false,drawing=false,erasing=false,currentColor='#3b4032';
+
+function resizeCanvas(){
+  // 描いた中身を保持してリサイズ
+  const prev=document.createElement('canvas');
+  prev.width=board.width;prev.height=board.height;
+  prev.getContext('2d').drawImage(board,0,0);
+  board.width=board.offsetWidth;
+  board.height=board.offsetHeight;
+  if(prev.width&&prev.height)ctx.drawImage(prev,0,0);
+}
+window.addEventListener('resize',()=>{if(drawingMode)resizeCanvas();});
+
+modeBtn.addEventListener('click',()=>{
+  drawingMode=!drawingMode;
+  if(drawingMode){
+    editor.style.display='none';
+    boardWrap.style.display='block';
+    palette.classList.add('show');
+    modeBtn.textContent='文字モード';
+    resizeCanvas();
+  }else{
+    boardWrap.style.display='none';
+    editor.style.display='block';
+    palette.classList.remove('show');
+    modeBtn.textContent='お絵描きモード';
+  }
+});
+
+clearBtn.addEventListener('click',()=>{
+  if(drawingMode){
+    if(confirm('お絵描きを白紙にしますか？'))ctx.clearRect(0,0,board.width,board.height);
+  }else{
+    if(confirm('メモをぜんぶ消しますか？')){editor.value='';editor.focus();}
+  }
+});
+
+colorBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    erasing=false;
+    colorBtns.forEach(b=>b.classList.remove('active'));
+    eraserBtn.classList.remove('active');
+    btn.classList.add('active');
+    currentColor=btn.dataset.color;
+    ctx.globalCompositeOperation='source-over';
+  });
+});
+eraserBtn.addEventListener('click',()=>{
+  erasing=true;
+  colorBtns.forEach(b=>b.classList.remove('active'));
+  eraserBtn.classList.add('active');
+  ctx.globalCompositeOperation='destination-out';
+});
+
+function pos(e){const r=board.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+board.addEventListener('pointerdown',e=>{
+  drawing=true;board.setPointerCapture(e.pointerId);
+  const [x,y]=pos(e);
+  ctx.beginPath();ctx.moveTo(x,y);
+});
+board.addEventListener('pointermove',e=>{
+  if(!drawing)return;
+  ctx.lineWidth=erasing?36:7;
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.strokeStyle=currentColor;
+  const [x,y]=pos(e);
+  ctx.lineTo(x,y);ctx.stroke();
+});
+['pointerup','pointercancel'].forEach(evt=>board.addEventListener(evt,()=>drawing=false));
+</script>
+</body>
+</html>
