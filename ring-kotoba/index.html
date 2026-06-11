@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>リング言葉クイズ｜あそび・脳トレ素材集</title>
+<meta name="description" content="輪に並んだ文字を右回りに読んで、隠れた言葉を見つけるあそび。オンラインデイサービス協会の無料素材集。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0;}
+
+.stage{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);text-align:center;
+  margin:28px auto 0;max-width:680px;
+  padding:clamp(22px,5vw,40px) 14px;
+}
+.q-label{color:var(--muted);font-size:15px;margin:0 0 6px;}
+.ring-host svg{width:min(86vw,400px);height:auto;display:block;margin:0 auto;}
+.ring-char{font-family:var(--font-head);font-weight:700;}
+
+.answer{display:none;margin-top:18px;padding-top:20px;border-top:1px dashed var(--line);}
+.answer.show{display:block;}
+.answer .a-label{font-size:14px;color:var(--muted);letter-spacing:.14em;}
+.answer .a-hira{font-family:var(--font-head);font-weight:700;font-size:clamp(30px,7vw,48px);color:var(--accent-deep);line-height:1.4;}
+.answer .a-kanji{font-size:clamp(17px,4vw,22px);}
+.answer .a-hide{font-size:16px;color:var(--muted);margin-top:4px;}
+.answer .a-hide b{color:var(--accent-deep);font-size:1.3em;font-family:var(--font-head);}
+
+.controls{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 8px;}
+.btn{
+  font-family:var(--font-body);font-weight:700;font-size:19px;cursor:pointer;
+  padding:15px 40px;border-radius:999px;border:none;
+  background:var(--accent);color:#fff;box-shadow:var(--shadow);
+  transition:background .15s, opacity .15s;
+}
+.btn:hover{background:var(--accent-deep);}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);}
+.btn.ghost:hover{border-color:var(--accent);background:var(--card);}
+
+.howto{
+  max-width:680px;margin:34px auto 0;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:20px 24px;
+  font-size:15.5px;
+}
+.howto b{font-family:var(--font-head);font-size:17px;display:block;margin-bottom:6px;letter-spacing:.04em;}
+.howto ul{margin:0;padding-left:1.3em;}
+.howto li{margin:4px 0;}
+
+footer{margin:44px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+
+  <header>
+    <div class="eyebrow">あそび・脳トレ素材集</div>
+    <h1>リング言葉クイズ</h1>
+    <p class="lead">輪に並んだ文字を右回りに読むと、ある言葉になります。「？」に入る文字は何でしょう？</p>
+  </header>
+
+  <main>
+    <div class="stage" aria-live="polite">
+      <p class="q-label">どこから読み始めるかも、考えどころです。</p>
+      <div class="ring-host" id="ringHost"></div>
+      <div class="answer" id="answer">
+        <div class="a-label">こたえ</div>
+        <div class="a-hira" id="aHira"></div>
+        <div class="a-kanji" id="aKanji"></div>
+        <div class="a-hide">「？」に入る文字は <b id="aHide"></b></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="showBtn">答えを見る</button>
+      <button class="btn ghost" id="nextBtn">次の問題</button>
+    </div>
+
+    <div class="howto">
+      <b>あそびかた</b>
+      <ul>
+        <li>文字は<b style="display:inline;">右回り（時計回り）</b>に読みます。読み始めの位置は決まっていません。</li>
+        <li>まずは声に出して、いろいろな場所から読んでみましょう。</li>
+        <li>言葉が見つかったら、「？」に入る文字を当ててください。</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a><br><span style="display:inline-block;margin-top:10px;">この素材集は、オンラインデイサービスの現場で使われています。<br>サービスを利用してみたい方は <a href="https://www.onlinedayservice.com/#operators">導入事業者のご紹介</a> へ</span></footer>
+</div>
+
+<script>
+const host=document.getElementById('ringHost');
+const answerEl=document.getElementById('answer');
+const aHira=document.getElementById('aHira');
+const aKanji=document.getElementById('aKanji');
+const aHide=document.getElementById('aHide');
+const showBtn=document.getElementById('showBtn');
+const nextBtn=document.getElementById('nextBtn');
+let WORDS=[],lastIdx=-1;
+
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(d=>{WORDS=d.words;next();});
+
+const NS='http://www.w3.org/2000/svg';
+function el(name,attrs){const e=document.createElementNS(NS,name);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
+function polar(cx,cy,r,deg){const t=deg*Math.PI/180;return [cx+r*Math.cos(t),cy+r*Math.sin(t)];}
+
+function drawRing(chars,hideIdx){
+  host.innerHTML='';
+  const n=chars.length,size=340,cx=size/2,cy=size/2;
+  const rout=158,rin=58,rmid=(rout+rin)/2;
+  const svg=el('svg',{viewBox:'0 0 '+size+' '+size,role:'img','aria-label':'文字の輪'});
+  const step=360/n;
+
+  // 隠し文字のセクタをうすく塗る
+  {
+    const a0=-90+step*hideIdx-step/2, a1=a0+step;
+    const p1=polar(cx,cy,rin,a0),p2=polar(cx,cy,rout,a0),p3=polar(cx,cy,rout,a1),p4=polar(cx,cy,rin,a1);
+    svg.appendChild(el('path',{d:`M${p1[0]},${p1[1]} L${p2[0]},${p2[1]} A${rout},${rout} 0 0 1 ${p3[0]},${p3[1]} L${p4[0]},${p4[1]} A${rin},${rin} 0 0 0 ${p1[0]},${p1[1]} Z`,fill:'#edf0e6'}));
+  }
+
+  svg.appendChild(el('circle',{cx,cy,r:rout,fill:'none',stroke:'var(--accent-deep)','stroke-width':3}));
+  svg.appendChild(el('circle',{cx,cy,r:rin,fill:'none',stroke:'var(--accent-deep)','stroke-width':2}));
+
+  // 仕切り線
+  for(let i=0;i<n;i++){
+    const a=-90+step*i-step/2;
+    const p1=polar(cx,cy,rin,a),p2=polar(cx,cy,rout,a);
+    svg.appendChild(el('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:'var(--line)','stroke-width':2}));
+  }
+
+  // 文字
+  for(let i=0;i<n;i++){
+    const [x,y]=polar(cx,cy,rmid,-90+step*i);
+    const t=el('text',{x,y,'text-anchor':'middle','dominant-baseline':'central','font-size':n===6?34:38,fill:chars[i]==='？'?'var(--accent-deep)':'var(--ink)',class:'ring-char'});
+    t.textContent=chars[i];
+    svg.appendChild(t);
+  }
+
+  // 中央: 右回りの矢印ヒント
+  const arc=el('path',{d:`M ${cx-24} ${cy-12} A 27 27 0 1 1 ${cx-26} ${cy+14}`,fill:'none',stroke:'var(--muted)','stroke-width':3,'stroke-linecap':'round'});
+  svg.appendChild(arc);
+  svg.appendChild(el('path',{d:`M ${cx-26} ${cy+14} l 10,-7 M ${cx-26} ${cy+14} l 12,3`,fill:'none',stroke:'var(--muted)','stroke-width':3,'stroke-linecap':'round'}));
+
+  host.appendChild(svg);
+}
+
+function next(){
+  let idx;
+  do{idx=Math.floor(Math.random()*WORDS.length);}while(idx===lastIdx&&WORDS.length>1);
+  lastIdx=idx;
+  const w=WORDS[idx];
+  const chars=[...w.hiragana];
+  const n=chars.length;
+  const shift=Math.floor(Math.random()*n);
+  const ring=chars.slice(shift).concat(chars.slice(0,shift));
+  const hideIdx=Math.floor(Math.random()*n);
+  const hidden=ring[hideIdx];
+  ring[hideIdx]='？';
+  drawRing(ring,hideIdx);
+  aHira.textContent=w.hiragana;
+  aKanji.textContent='（'+w.kanji+'）';
+  aHide.textContent='「'+hidden+'」';
+  answerEl.classList.remove('show');
+  showBtn.disabled=false;
+}
+showBtn.addEventListener('click',()=>{answerEl.classList.add('show');showBtn.disabled=true;});
+nextBtn.addEventListener('click',()=>{if(WORDS.length)next();});
+</script>
+</body>
+</html>

@@ -1,0 +1,865 @@
+{
+ "title": "リング言葉クイズ",
+ "words": [
+  {
+   "hiragana": "あなうんさー",
+   "kanji": "アナウンサー"
+  },
+  {
+   "hiragana": "あすれちっく",
+   "kanji": "アスレチック"
+  },
+  {
+   "hiragana": "あすふぁると",
+   "kanji": "アスファルト"
+  },
+  {
+   "hiragana": "あかしんごう",
+   "kanji": "赤信号"
+  },
+  {
+   "hiragana": "あいすてぃー",
+   "kanji": "アイスティー"
+  },
+  {
+   "hiragana": "あかえんぴつ",
+   "kanji": "赤鉛筆"
+  },
+  {
+   "hiragana": "いいんちょう",
+   "kanji": "委員長"
+  },
+  {
+   "hiragana": "いきとうごう",
+   "kanji": "意気投合"
+  },
+  {
+   "hiragana": "いくもうざい",
+   "kanji": "育毛剤"
+  },
+  {
+   "hiragana": "いたずらっこ",
+   "kanji": "いたずらっ子"
+  },
+  {
+   "hiragana": "うんどうかい",
+   "kanji": "運動会"
+  },
+  {
+   "hiragana": "うんてんしゅ",
+   "kanji": "運転手"
+  },
+  {
+   "hiragana": "うめちゃづけ",
+   "kanji": "梅茶漬け"
+  },
+  {
+   "hiragana": "うぉーきんぐ",
+   "kanji": "ウォーキング"
+  },
+  {
+   "hiragana": "うーろんちゃ",
+   "kanji": "烏龍茶"
+  },
+  {
+   "hiragana": "えあろびくす",
+   "kanji": "エアロビクス"
+  },
+  {
+   "hiragana": "えいきゅうし",
+   "kanji": "永久歯"
+  },
+  {
+   "hiragana": "えくささいず",
+   "kanji": "エクササイズ"
+  },
+  {
+   "hiragana": "えれべーたー",
+   "kanji": "エレベーター"
+  },
+  {
+   "hiragana": "おたふくかぜ",
+   "kanji": "おたふく風邪"
+  },
+  {
+   "hiragana": "おとぎばなし",
+   "kanji": "おとぎ話"
+  },
+  {
+   "hiragana": "おやこうこう",
+   "kanji": "親孝行"
+  },
+  {
+   "hiragana": "かいすいよく",
+   "kanji": "海水浴"
+  },
+  {
+   "hiragana": "かいてんずし",
+   "kanji": "回転寿司"
+  },
+  {
+   "hiragana": "かふんしょう",
+   "kanji": "花粉症"
+  },
+  {
+   "hiragana": "かみきりむし",
+   "kanji": "カミキリムシ"
+  },
+  {
+   "hiragana": "きゃらくたー",
+   "kanji": "キャラクター"
+  },
+  {
+   "hiragana": "きゅうしゅう",
+   "kanji": "九州"
+  },
+  {
+   "hiragana": "きょうかしょ",
+   "kanji": "教科書"
+  },
+  {
+   "hiragana": "きゅーぴっと",
+   "kanji": "キューピット"
+  },
+  {
+   "hiragana": "きょうりゅう",
+   "kanji": "恐竜"
+  },
+  {
+   "hiragana": "きーほるだー",
+   "kanji": "キーホルダー"
+  },
+  {
+   "hiragana": "くいしんぼう",
+   "kanji": "食いしん坊"
+  },
+  {
+   "hiragana": "くみたいそう",
+   "kanji": "組体操"
+  },
+  {
+   "hiragana": "くらすめいと",
+   "kanji": "クラスメイト"
+  },
+  {
+   "hiragana": "くらりねっと",
+   "kanji": "クラリネット"
+  },
+  {
+   "hiragana": "くりーにんぐ",
+   "kanji": "クリーニング"
+  },
+  {
+   "hiragana": "くろこしょう",
+   "kanji": "黒胡椒"
+  },
+  {
+   "hiragana": "けいこうとう",
+   "kanji": "蛍光灯"
+  },
+  {
+   "hiragana": "けいさつしょ",
+   "kanji": "警察署"
+  },
+  {
+   "hiragana": "けいろうのひ",
+   "kanji": "敬老の日"
+  },
+  {
+   "hiragana": "けしょうすい",
+   "kanji": "化粧水"
+  },
+  {
+   "hiragana": "けつえきがた",
+   "kanji": "血液型"
+  },
+  {
+   "hiragana": "けっこんしき",
+   "kanji": "結婚式"
+  },
+  {
+   "hiragana": "けんびきょう",
+   "kanji": "顕微鏡"
+  },
+  {
+   "hiragana": "こまーしゃる",
+   "kanji": "コマーシャル"
+  },
+  {
+   "hiragana": "こんくりーと",
+   "kanji": "コンクリート"
+  },
+  {
+   "hiragana": "さいせんばこ",
+   "kanji": "賽銭箱"
+  },
+  {
+   "hiragana": "さにーれたす",
+   "kanji": "サニーレタス"
+  },
+  {
+   "hiragana": "さはらさばく",
+   "kanji": "サハラ砂漠"
+  },
+  {
+   "hiragana": "さんかくけい",
+   "kanji": "三角形"
+  },
+  {
+   "hiragana": "さんどいっち",
+   "kanji": "サンドイッチ"
+  },
+  {
+   "hiragana": "さんごしょう",
+   "kanji": "珊瑚礁"
+  },
+  {
+   "hiragana": "さいくりんぐ",
+   "kanji": "サイクリング"
+  },
+  {
+   "hiragana": "さくらんぼう",
+   "kanji": "さくらんぼう"
+  },
+  {
+   "hiragana": "しーとべると",
+   "kanji": "シートベルト"
+  },
+  {
+   "hiragana": "しゃんでりあ",
+   "kanji": "シャンデリア"
+  },
+  {
+   "hiragana": "しゅれっだー",
+   "kanji": "シュレッダー"
+  },
+  {
+   "hiragana": "すきゃんだる",
+   "kanji": "スキャンダル"
+  },
+  {
+   "hiragana": "すとろべりー",
+   "kanji": "ストロベリー"
+  },
+  {
+   "hiragana": "すぱげってぃ",
+   "kanji": "スパゲッティ"
+  },
+  {
+   "hiragana": "すふぃんくす",
+   "kanji": "スフィンクス"
+  },
+  {
+   "hiragana": "すきむみるく",
+   "kanji": "スキムミルク"
+  },
+  {
+   "hiragana": "せとないかい",
+   "kanji": "瀬戸内海"
+  },
+  {
+   "hiragana": "せいほうけい",
+   "kanji": "正方形"
+  },
+  {
+   "hiragana": "せきゅりてぃ",
+   "kanji": "セキュリティ"
+  },
+  {
+   "hiragana": "そうげいばす",
+   "kanji": "送迎バス"
+  },
+  {
+   "hiragana": "そうせんきょ",
+   "kanji": "総選挙"
+  },
+  {
+   "hiragana": "そーらーかー",
+   "kanji": "ソーラーカー"
+  },
+  {
+   "hiragana": "そーらんぶし",
+   "kanji": "ソーラン節"
+  },
+  {
+   "hiragana": "そふとぼーる",
+   "kanji": "ソフトボール"
+  },
+  {
+   "hiragana": "たいおんけい",
+   "kanji": "体温計"
+  },
+  {
+   "hiragana": "たいせいよう",
+   "kanji": "大西洋"
+  },
+  {
+   "hiragana": "たいへいよう",
+   "kanji": "太平洋"
+  },
+  {
+   "hiragana": "たおるけっと",
+   "kanji": "タオルケット"
+  },
+  {
+   "hiragana": "たとえばなし",
+   "kanji": "例え話"
+  },
+  {
+   "hiragana": "たんじょうび",
+   "kanji": "誕生日"
+  },
+  {
+   "hiragana": "たんぱくしつ",
+   "kanji": "タンパク質"
+  },
+  {
+   "hiragana": "あーもんど",
+   "kanji": "アーモンド"
+  },
+  {
+   "hiragana": "あまのがわ",
+   "kanji": "天の川"
+  },
+  {
+   "hiragana": "あんけーと",
+   "kanji": "アンケート"
+  },
+  {
+   "hiragana": "いいんかい",
+   "kanji": "委員会"
+  },
+  {
+   "hiragana": "いかふらい",
+   "kanji": "イカフライ"
+  },
+  {
+   "hiragana": "おむらいす",
+   "kanji": "オムライス"
+  },
+  {
+   "hiragana": "かーぺっと",
+   "kanji": "カーペット"
+  },
+  {
+   "hiragana": "かいじゅう",
+   "kanji": "怪獣"
+  },
+  {
+   "hiragana": "かきごおり",
+   "kanji": "カキ氷"
+  },
+  {
+   "hiragana": "かくとうぎ",
+   "kanji": "格闘技"
+  },
+  {
+   "hiragana": "かたつむり",
+   "kanji": "カタツムリ"
+  },
+  {
+   "hiragana": "かつかれー",
+   "kanji": "カツカレー"
+  },
+  {
+   "hiragana": "かふぇおれ",
+   "kanji": "カフェオレ"
+  },
+  {
+   "hiragana": "かぶとむし",
+   "kanji": "カブトムシ"
+  },
+  {
+   "hiragana": "きかんしゃ",
+   "kanji": "機関車"
+  },
+  {
+   "hiragana": "きゃらめる",
+   "kanji": "キャラメル"
+  },
+  {
+   "hiragana": "きゃんでぃ",
+   "kanji": "キャンディ"
+  },
+  {
+   "hiragana": "きゅうけい",
+   "kanji": "休憩"
+  },
+  {
+   "hiragana": "きゅうじつ",
+   "kanji": "休日"
+  },
+  {
+   "hiragana": "きょういく",
+   "kanji": "教育"
+  },
+  {
+   "hiragana": "きょうしつ",
+   "kanji": "教室"
+  },
+  {
+   "hiragana": "きょうそう",
+   "kanji": "競争"
+  },
+  {
+   "hiragana": "きょうだい",
+   "kanji": "兄弟"
+  },
+  {
+   "hiragana": "きりぎりす",
+   "kanji": "キリギリス"
+  },
+  {
+   "hiragana": "きんようび",
+   "kanji": "金曜日"
+  },
+  {
+   "hiragana": "くりすます",
+   "kanji": "クリスマス"
+  },
+  {
+   "hiragana": "くるまいす",
+   "kanji": "車椅子"
+  },
+  {
+   "hiragana": "くるまえび",
+   "kanji": "車海老"
+  },
+  {
+   "hiragana": "くろひょう",
+   "kanji": "クロヒョウ"
+  },
+  {
+   "hiragana": "くろまぐろ",
+   "kanji": "クロマグロ"
+  },
+  {
+   "hiragana": "けいさんき",
+   "kanji": "計算機"
+  },
+  {
+   "hiragana": "けちゃっぷ",
+   "kanji": "ケチャップ"
+  },
+  {
+   "hiragana": "けっしょう",
+   "kanji": "決勝"
+  },
+  {
+   "hiragana": "けんきゅう",
+   "kanji": "研究"
+  },
+  {
+   "hiragana": "こうきゅう",
+   "kanji": "高級"
+  },
+  {
+   "hiragana": "こめでぃー",
+   "kanji": "コメディー"
+  },
+  {
+   "hiragana": "こもりうた",
+   "kanji": "子守唄"
+  },
+  {
+   "hiragana": "さくらじま",
+   "kanji": "桜島"
+  },
+  {
+   "hiragana": "さつまいも",
+   "kanji": "さつまいも"
+  },
+  {
+   "hiragana": "しゅうまい",
+   "kanji": "焼売"
+  },
+  {
+   "hiragana": "しゅくだい",
+   "kanji": "宿題"
+  },
+  {
+   "hiragana": "すいはんき",
+   "kanji": "炊飯器"
+  },
+  {
+   "hiragana": "すいみんぐ",
+   "kanji": "スイミング"
+  },
+  {
+   "hiragana": "すくわっと",
+   "kanji": "スクワット"
+  },
+  {
+   "hiragana": "すずめばち",
+   "kanji": "スズメバチ"
+  },
+  {
+   "hiragana": "すとれっち",
+   "kanji": "ストレッチ"
+  },
+  {
+   "hiragana": "すにーかー",
+   "kanji": "スニーカー"
+  },
+  {
+   "hiragana": "すぴーかー",
+   "kanji": "スピーカー"
+  },
+  {
+   "hiragana": "すりらんか",
+   "kanji": "スリランカ"
+  },
+  {
+   "hiragana": "せいちょう",
+   "kanji": "成長"
+  },
+  {
+   "hiragana": "せんたくき",
+   "kanji": "洗濯機"
+  },
+  {
+   "hiragana": "せんぷうき",
+   "kanji": "扇風機"
+  },
+  {
+   "hiragana": "そつぎょう",
+   "kanji": "卒業"
+  },
+  {
+   "hiragana": "そんごくう",
+   "kanji": "孫悟空"
+  },
+  {
+   "hiragana": "たいじゅう",
+   "kanji": "体重"
+  },
+  {
+   "hiragana": "たいちょう",
+   "kanji": "体調"
+  },
+  {
+   "hiragana": "たからくじ",
+   "kanji": "宝くじ"
+  },
+  {
+   "hiragana": "たからじま",
+   "kanji": "宝島"
+  },
+  {
+   "hiragana": "たからもの",
+   "kanji": "宝物"
+  },
+  {
+   "hiragana": "たまごやき",
+   "kanji": "卵焼き"
+  },
+  {
+   "hiragana": "ちきゅうぎ",
+   "kanji": "地球儀"
+  },
+  {
+   "hiragana": "ちゅうしゃ",
+   "kanji": "注射"
+  },
+  {
+   "hiragana": "ちょうこく",
+   "kanji": "彫刻"
+  },
+  {
+   "hiragana": "ていしょく",
+   "kanji": "定食"
+  },
+  {
+   "hiragana": "てぃっしゅ",
+   "kanji": "ティッシュ"
+  },
+  {
+   "hiragana": "とうきょう",
+   "kanji": "東京"
+  },
+  {
+   "hiragana": "とうにゅう",
+   "kanji": "豆乳"
+  },
+  {
+   "hiragana": "とけいだい",
+   "kanji": "時計台"
+  },
+  {
+   "hiragana": "とっきゅう",
+   "kanji": "特急"
+  },
+  {
+   "hiragana": "なんきょく",
+   "kanji": "南極"
+  },
+  {
+   "hiragana": "にくきゅう",
+   "kanji": "肉球"
+  },
+  {
+   "hiragana": "にくじゃが",
+   "kanji": "肉じゃが"
+  },
+  {
+   "hiragana": "にくだんご",
+   "kanji": "肉団子"
+  },
+  {
+   "hiragana": "にっしょく",
+   "kanji": "日食"
+  },
+  {
+   "hiragana": "にほんかい",
+   "kanji": "日本海"
+  },
+  {
+   "hiragana": "にほんちゃ",
+   "kanji": "日本茶"
+  },
+  {
+   "hiragana": "にほんとう",
+   "kanji": "日本刀"
+  },
+  {
+   "hiragana": "にんぎょう",
+   "kanji": "人形"
+  },
+  {
+   "hiragana": "ぬいぐるみ",
+   "kanji": "ぬいぐるみ"
+  },
+  {
+   "hiragana": "ねっくれす",
+   "kanji": "ネックレス"
+  },
+  {
+   "hiragana": "のうぎょう",
+   "kanji": "農業"
+  },
+  {
+   "hiragana": "のうりょく",
+   "kanji": "能力"
+  },
+  {
+   "hiragana": "はくちょう",
+   "kanji": "白鳥"
+  },
+  {
+   "hiragana": "はむすたー",
+   "kanji": "ハムスター"
+  },
+  {
+   "hiragana": "はりねずみ",
+   "kanji": "ハリネズミ"
+  },
+  {
+   "hiragana": "ひとめぼれ",
+   "kanji": "一目惚れ"
+  },
+  {
+   "hiragana": "ひとりごと",
+   "kanji": "独り言"
+  },
+  {
+   "hiragana": "ひなまつり",
+   "kanji": "ひな祭り"
+  },
+  {
+   "hiragana": "ひややっこ",
+   "kanji": "冷奴"
+  },
+  {
+   "hiragana": "ひるやすみ",
+   "kanji": "昼休み"
+  },
+  {
+   "hiragana": "ふかしいも",
+   "kanji": "ふかし芋"
+  },
+  {
+   "hiragana": "ふつかよい",
+   "kanji": "二日酔い"
+  },
+  {
+   "hiragana": "ふゆやすみ",
+   "kanji": "冬休み"
+  },
+  {
+   "hiragana": "へるめっと",
+   "kanji": "ヘルメット"
+  },
+  {
+   "hiragana": "ほうちょう",
+   "kanji": "包丁"
+  },
+  {
+   "hiragana": "ほけんしつ",
+   "kanji": "保健室"
+  },
+  {
+   "hiragana": "ほっきょく",
+   "kanji": "北極"
+  },
+  {
+   "hiragana": "ほっちきす",
+   "kanji": "ホッチキス"
+  },
+  {
+   "hiragana": "ほととぎす",
+   "kanji": "ホトトギス"
+  },
+  {
+   "hiragana": "まぐかっぷ",
+   "kanji": "マグカップ"
+  },
+  {
+   "hiragana": "ましゅまろ",
+   "kanji": "マシュマロ"
+  },
+  {
+   "hiragana": "ますかっと",
+   "kanji": "マスカット"
+  },
+  {
+   "hiragana": "ますたーど",
+   "kanji": "マスタード"
+  },
+  {
+   "hiragana": "まつばづえ",
+   "kanji": "松葉杖"
+  },
+  {
+   "hiragana": "まどがらす",
+   "kanji": "窓ガラス"
+  },
+  {
+   "hiragana": "まねきねこ",
+   "kanji": "招き猫"
+  },
+  {
+   "hiragana": "まめちしき",
+   "kanji": "豆知識"
+  },
+  {
+   "hiragana": "まよねーず",
+   "kanji": "マヨネーズ"
+  },
+  {
+   "hiragana": "まんじゅう",
+   "kanji": "饅頭"
+  },
+  {
+   "hiragana": "まんぽけい",
+   "kanji": "万歩計"
+  },
+  {
+   "hiragana": "むしめがね",
+   "kanji": "虫眼鏡"
+  },
+  {
+   "hiragana": "むじんとう",
+   "kanji": "無人島"
+  },
+  {
+   "hiragana": "めいきょく",
+   "kanji": "名曲"
+  },
+  {
+   "hiragana": "めだまやき",
+   "kanji": "目玉焼き"
+  },
+  {
+   "hiragana": "めんたいこ",
+   "kanji": "明太子"
+  },
+  {
+   "hiragana": "もくひょう",
+   "kanji": "目標"
+  },
+  {
+   "hiragana": "ものがたり",
+   "kanji": "物語"
+  },
+  {
+   "hiragana": "ものれーる",
+   "kanji": "モノレール"
+  },
+  {
+   "hiragana": "ももたろう",
+   "kanji": "桃太郎"
+  },
+  {
+   "hiragana": "もるもっと",
+   "kanji": "モルモット"
+  },
+  {
+   "hiragana": "やきざかな",
+   "kanji": "焼き魚"
+  },
+  {
+   "hiragana": "やっきょく",
+   "kanji": "薬局"
+  },
+  {
+   "hiragana": "ゆうえんち",
+   "kanji": "遊園地"
+  },
+  {
+   "hiragana": "ゆうしょう",
+   "kanji": "優勝"
+  },
+  {
+   "hiragana": "ゆうじょう",
+   "kanji": "友情"
+  },
+  {
+   "hiragana": "ゆうしょく",
+   "kanji": "夕食"
+  },
+  {
+   "hiragana": "ゆきおんな",
+   "kanji": "雪女"
+  },
+  {
+   "hiragana": "ゆきだるま",
+   "kanji": "雪だるま"
+  },
+  {
+   "hiragana": "ゆでたまご",
+   "kanji": "ゆで卵"
+  },
+  {
+   "hiragana": "ゆびずもう",
+   "kanji": "指相撲"
+  },
+  {
+   "hiragana": "よーぐると",
+   "kanji": "ヨーグルト"
+  },
+  {
+   "hiragana": "よっぱらい",
+   "kanji": "酔っ払い"
+  },
+  {
+   "hiragana": "わいしゃつ",
+   "kanji": "ワイシャツ"
+  },
+  {
+   "hiragana": "わたりどり",
+   "kanji": "渡り鳥"
+  },
+  {
+   "hiragana": "わらいごえ",
+   "kanji": "笑い声"
+  },
+  {
+   "hiragana": "わらびもち",
+   "kanji": "わらび餅"
+  },
+  {
+   "hiragana": "わんこそば",
+   "kanji": "わんこ蕎麦"
+  }
+ ]
+}
