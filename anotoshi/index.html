@@ -203,7 +203,7 @@ function show(y){ rYear.textContent=y; rWareki.textContent=wareki(y); }
 /* ---------- 生まれ年から旅する ---------- */
 function buildBirth(){
   const sel=document.getElementById('birthSel');
-  for(let y=1915;y<=1970;y++){
+  for(let y=1915;y<=2014;y++){ // お孫さん世代も遊べるよう平成26年生まれまで（5歳=平成31年）
     const o=document.createElement('option');
     o.value=y; o.textContent=y+"年（"+warekiBirth(y)+"）生まれ";
     sel.appendChild(o);
@@ -213,14 +213,14 @@ function buildBirth(){
     list.innerHTML='';
     const b=parseInt(sel.value,10);
     if(!b) return;
-    for(let age=10;age<=90;age+=5){
+    for(let age=5;age<=90;age+=5){
       const y=b+age;
       if(y<FIRST||y>LAST) continue;
       const ok=AVAIL.includes(y);
       const a=document.createElement('a');
       a.className='agebtn'+(ok?'':' disabled');
       a.href=ok?('./year.html?y='+y):'#';
-      const label=(age===20)?'二十歳':(age+'歳');
+      const label=age+'歳';
       a.innerHTML='<span class="age">'+label+'</span><span class="yr">'+y+'年・'+wareki(y).replace('大正15年・','')+(ok?'':'（準備中）')+'</span>';
       list.appendChild(a);
     }
