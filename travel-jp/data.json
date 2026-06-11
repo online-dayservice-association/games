@@ -1,0 +1,265 @@
+{
+ "title": "国内旅行",
+ "spots": [
+  {
+   "region": "北海道",
+   "name": "北海道全域",
+   "url": "https://uu-hokkaido.jp/marukita.shtml"
+  },
+  {
+   "region": "北海道",
+   "name": "札幌",
+   "url": "https://www.sapporo.travel/spot/"
+  },
+  {
+   "region": "北海道",
+   "name": "小樽",
+   "url": "https://otaru.gr.jp/enjoy"
+  },
+  {
+   "region": "東北",
+   "name": "青森",
+   "url": "https://aomori-tourism.com/spot/index.html"
+  },
+  {
+   "region": "東北",
+   "name": "秋田",
+   "url": "https://akita-fun.jp/spots"
+  },
+  {
+   "region": "東北",
+   "name": "岩手",
+   "url": "https://iwatetabi.jp/"
+  },
+  {
+   "region": "東北",
+   "name": "山形",
+   "url": "https://yamagatakanko.com/attractions/"
+  },
+  {
+   "region": "東北",
+   "name": "宮城",
+   "url": "https://www.miyagi-kankou.or.jp/"
+  },
+  {
+   "region": "東北",
+   "name": "福島",
+   "url": "https://www.tif.ne.jp/"
+  },
+  {
+   "region": "東北",
+   "name": "新潟",
+   "url": "https://niigata-kankou.or.jp/spot"
+  },
+  {
+   "region": "関東",
+   "name": "栃木",
+   "url": "https://www.tochigiji.or.jp/spot/"
+  },
+  {
+   "region": "関東",
+   "name": "茨城",
+   "url": "https://www.ibarakiguide.jp/spot.php"
+  },
+  {
+   "region": "関東",
+   "name": "千葉",
+   "url": "https://maruchiba.jp/spot/index.html"
+  },
+  {
+   "region": "関東",
+   "name": "群馬",
+   "url": "https://gunma-kanko.jp/spots"
+  },
+  {
+   "region": "関東",
+   "name": "埼玉",
+   "url": "https://chocotabi-saitama.jp/spot/"
+  },
+  {
+   "region": "関東",
+   "name": "東京",
+   "url": "https://www.gotokyo.org/jp/spot/index.html"
+  },
+  {
+   "region": "関東",
+   "name": "神奈川",
+   "url": "https://www.kanagawa-kankou.or.jp/spot"
+  },
+  {
+   "region": "中部",
+   "name": "岐阜",
+   "url": "https://www.kankou-gifu.jp/spot/index.html"
+  },
+  {
+   "region": "中部",
+   "name": "愛知",
+   "url": "https://aichinow.pref.aichi.jp/spots/"
+  },
+  {
+   "region": "中部",
+   "name": "三重",
+   "url": "https://www.kankomie.or.jp/spot"
+  },
+  {
+   "region": "中部",
+   "name": "静岡",
+   "url": "https://hellonavi.jp/area/index.html"
+  },
+  {
+   "region": "中部",
+   "name": "熱海",
+   "url": "https://www.ataminews.gr.jp/spot"
+  },
+  {
+   "region": "中部",
+   "name": "伊豆",
+   "url": "https://itospa.com/spot/index.html"
+  },
+  {
+   "region": "北陸",
+   "name": "新潟",
+   "url": "https://niigata-kankou.or.jp/spot"
+  },
+  {
+   "region": "北陸",
+   "name": "山梨",
+   "url": "https://www.yamanashishi-kankou.com/nature/"
+  },
+  {
+   "region": "北陸",
+   "name": "長野",
+   "url": "https://www.nagano-cvb.or.jp/modules/content/theme/"
+  },
+  {
+   "region": "北陸",
+   "name": "富山",
+   "url": "https://www.info-toyama.com/attractions"
+  },
+  {
+   "region": "北陸",
+   "name": "石川",
+   "url": "https://www.hot-ishikawa.jp/spot/index.html"
+  },
+  {
+   "region": "北陸",
+   "name": "福井",
+   "url": "https://www.fuku-e.com/spot/index.html"
+  },
+  {
+   "region": "関西",
+   "name": "滋賀",
+   "url": "https://www.biwako-visitors.jp/spot/"
+  },
+  {
+   "region": "関西",
+   "name": "京都",
+   "url": "https://www.kyoto-kankou.or.jp/info_search"
+  },
+  {
+   "region": "関西",
+   "name": "兵庫",
+   "url": "https://www.hyogo-tourism.jp/spot/"
+  },
+  {
+   "region": "関西",
+   "name": "大阪",
+   "url": "https://osaka-info.jp/spot/"
+  },
+  {
+   "region": "関西",
+   "name": "奈良",
+   "url": "https://yamatoji.nara-kankou.or.jp/002kanko/"
+  },
+  {
+   "region": "関西",
+   "name": "和歌山",
+   "url": "https://www.wakayama-kanko.or.jp/spots/index.html"
+  },
+  {
+   "region": "中国",
+   "name": "岡山",
+   "url": "https://www.okayama-kanko.jp/spot"
+  },
+  {
+   "region": "中国",
+   "name": "広島",
+   "url": "https://dive-hiroshima.com/explore/"
+  },
+  {
+   "region": "中国",
+   "name": "鳥取",
+   "url": "https://www.tottori-guide.jp/"
+  },
+  {
+   "region": "中国",
+   "name": "島根",
+   "url": "https://www.kankou-shimane.com/destination"
+  },
+  {
+   "region": "中国",
+   "name": "山口",
+   "url": "https://yamaguchi-tourism.jp/spot/index.html"
+  },
+  {
+   "region": "四国",
+   "name": "愛媛",
+   "url": "https://www.iyokannet.jp/spot"
+  },
+  {
+   "region": "四国",
+   "name": "香川",
+   "url": "https://www.my-kagawa.jp/point"
+  },
+  {
+   "region": "四国",
+   "name": "高知",
+   "url": "https://kochi-tabi.jp/search_spot_sightseeing.html"
+  },
+  {
+   "region": "四国",
+   "name": "徳島",
+   "url": "https://funfun-tokushima.jp/category4/spot/"
+  },
+  {
+   "region": "九州",
+   "name": "福岡",
+   "url": "https://www.crossroadfukuoka.jp/spot"
+  },
+  {
+   "region": "九州",
+   "name": "佐賀",
+   "url": "https://www.asobo-saga.jp/spots/"
+  },
+  {
+   "region": "九州",
+   "name": "長崎",
+   "url": "https://www.at-nagasaki.jp/spot"
+  },
+  {
+   "region": "九州",
+   "name": "熊本",
+   "url": "https://kumamoto.guide/spots/"
+  },
+  {
+   "region": "九州",
+   "name": "大分",
+   "url": "https://www.visit-oita.jp/spots/lists/"
+  },
+  {
+   "region": "九州",
+   "name": "宮崎",
+   "url": "https://www.kanko-miyazaki.jp/spot"
+  },
+  {
+   "region": "九州",
+   "name": "鹿児島",
+   "url": "https://www.kagoshima-kankou.com/guide"
+  },
+  {
+   "region": "九州",
+   "name": "沖縄",
+   "url": "https://www.okinawastory.jp/spot/"
+  }
+ ]
+}

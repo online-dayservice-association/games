@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国内旅行｜あそび・脳トレ素材集</title>
+<meta name="description" content="ルーレットで行き先を決めて、公式観光サイトをみんなで眺める旅行あそび。オンラインデイサービス協会の無料素材集。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0;}
+
+.stage{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);text-align:center;
+  margin:28px auto 0;max-width:640px;
+  padding:clamp(28px,6vw,48px) 20px;
+}
+.dest{
+  font-family:var(--font-head);font-weight:700;color:var(--accent-deep);
+  font-size:clamp(40px,10vw,72px);line-height:1.3;display:block;min-height:1.4em;
+}
+.dest.spin{color:var(--ink);}
+.cheer{min-height:1.8em;color:var(--muted);font-size:16px;margin:12px 0 0;}
+.golink{display:none;margin-top:16px;}
+.golink.show{display:block;}
+.golink a{
+  display:inline-block;font-family:var(--font-body);font-weight:700;font-size:19px;
+  padding:15px 36px;border-radius:999px;background:var(--accent-deep);color:#fff;
+  text-decoration:none;box-shadow:var(--shadow);
+}
+.golink a:hover{background:var(--accent);}
+.golink .ext-note{font-size:13px;color:var(--muted);margin-top:8px;}
+
+.controls{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 8px;}
+.btn{
+  font-family:var(--font-body);font-weight:700;font-size:19px;cursor:pointer;
+  padding:15px 44px;border-radius:999px;border:none;
+  background:var(--accent);color:#fff;box-shadow:var(--shadow);
+  transition:background .15s, opacity .15s;
+}
+.btn:hover{background:var(--accent-deep);}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+
+.section-label{display:flex;align-items:center;gap:16px;margin:40px 0 14px;}
+.section-label .label{font-family:var(--font-head);font-weight:700;font-size:22px;white-space:nowrap;letter-spacing:.04em;}
+.section-label .line{flex:1;height:1px;background:var(--line);}
+
+.region{margin:18px 0 4px;font-weight:700;color:var(--accent-deep);font-size:16px;letter-spacing:.08em;}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
+.linkCard{
+  display:block;text-align:center;padding:12px 8px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  color:var(--ink);text-decoration:none;font-weight:700;font-size:16px;
+  transition:transform .12s ease,border-color .12s ease;
+}
+.linkCard:hover{transform:translateY(-2px);border-color:var(--accent);}
+
+.notice{
+  max-width:680px;margin:34px auto 0;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:18px 24px;
+  font-size:14.5px;color:var(--muted);
+}
+.notice b{color:var(--ink);}
+
+footer{margin:44px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+
+  <header>
+    <div class="eyebrow">あそび・脳トレ素材集</div>
+    <h1>国内旅行</h1>
+    <p class="lead">ルーレットで行き先を決めて、観光地の写真をみんなで眺めながらお話ししましょう。</p>
+  </header>
+
+  <main>
+    <div class="stage" aria-live="polite">
+      <span class="dest" id="dest">どこへ行く？</span>
+      <p class="cheer" id="cheer">「用意スタート」を押してください。</p>
+      <div class="golink" id="golink"></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="startBtn">用意スタート</button>
+      <button class="btn" id="stopBtn" disabled>ストップ</button>
+    </div>
+
+    <div class="section-label"><span class="label">一覧からえらぶ</span><span class="line"></span></div>
+    <div id="allLinks"></div>
+
+    <div class="notice">
+      <b>リンク先について。</b>ご案内するリンクは、各地域の<b>公式の観光協会・観光案内</b>のページに限っています。リンクの先は外部のサイトで、内容はそれぞれの団体が管理しています（新しいタブで開きます）。
+    </div>
+  </main>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a><br><span style="display:inline-block;margin-top:10px;">この素材集は、オンラインデイサービスの現場で使われています。<br>サービスを利用してみたい方は <a href="https://www.onlinedayservice.com/#operators">導入事業者のご紹介</a> へ</span></footer>
+</div>
+
+<script>
+const destEl=document.getElementById('dest');
+const cheerEl=document.getElementById('cheer');
+const golink=document.getElementById('golink');
+const startBtn=document.getElementById('startBtn');
+const stopBtn=document.getElementById('stopBtn');
+const allLinks=document.getElementById('allLinks');
+let SPOTS=[],timer=null,stopping=false;
+
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+  SPOTS=d.spots;
+  renderList();
+});
+
+function renderList(){
+  const regions=[];
+  for(const s of SPOTS)if(!regions.includes(s.region||''))regions.push(s.region||'');
+  allLinks.innerHTML='';
+  for(const reg of regions){
+    if(reg){
+      const h=document.createElement('div');h.className='region';h.textContent=reg;
+      allLinks.appendChild(h);
+    }
+    const grid=document.createElement('div');grid.className='links';
+    for(const s of SPOTS.filter(x=>(x.region||'')===reg)){
+      const a=document.createElement('a');
+      a.className='linkCard';a.textContent=s.name;
+      a.href=s.url;a.target='_blank';a.rel='noopener';
+      grid.appendChild(a);
+    }
+    allLinks.appendChild(grid);
+  }
+}
+
+function pick(){return SPOTS[Math.floor(Math.random()*SPOTS.length)];}
+function tick(){destEl.textContent=pick().name;}
+
+startBtn.addEventListener('click',()=>{
+  if(!SPOTS.length)return;
+  if(timer)clearInterval(timer);
+  stopping=false;
+  destEl.classList.add('spin');
+  golink.classList.remove('show');
+  cheerEl.textContent='よいところで「ストップ」！';
+  timer=setInterval(tick,70);
+  startBtn.disabled=true;
+  stopBtn.disabled=false;
+});
+
+stopBtn.addEventListener('click',()=>{
+  if(stopping)return;
+  stopping=true;
+  stopBtn.disabled=true;
+  clearInterval(timer);
+  const steps=[90,130,180,240];
+  let i=0;
+  (function slow(){
+    if(i<steps.length){
+      tick();
+      setTimeout(slow,steps[i++]);
+    }else{
+      const final=pick();
+      destEl.textContent=final.name;
+      destEl.classList.remove('spin');
+      cheerEl.textContent='行き先が決まりました！';
+      golink.innerHTML='<a href="'+final.url+'" target="_blank" rel="noopener">そうだ、'+final.name+'へ行こう！</a><div class="ext-note">公式の観光ページが新しいタブで開きます</div>';
+      golink.classList.add('show');
+      startBtn.textContent='もう一回まわす';
+      startBtn.disabled=false;
+      stopping=false;
+    }
+  })();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+{
+ "title": "海外旅行",
+ "spots": [
+  {
+   "name": "マレーシア",
+   "url": "https://www.tourismmalaysia.or.jp/"
+  },
+  {
+   "name": "タイ",
+   "url": "https://www.thailandtravel.or.jp/"
+  },
+  {
+   "name": "シンガポール",
+   "url": "https://www.visitsingapore.com/ja_jp/"
+  },
+  {
+   "name": "フィリピン",
+   "url": "https://philippinetravel.jp/"
+  },
+  {
+   "name": "韓国",
+   "url": "https://japanese.visitkorea.or.kr/svc/main/index.do"
+  },
+  {
+   "name": "インドネシア",
+   "url": "https://www.indonesia.travel/jp/ja"
+  },
+  {
+   "name": "マカオ",
+   "url": "https://www.macaotourism.gov.mo/ja/"
+  },
+  {
+   "name": "グアム",
+   "url": "https://www.visitguam.jp/"
+  },
+  {
+   "name": "スイス",
+   "url": "https://www.myswitzerland.com/ja/"
+  },
+  {
+   "name": "台北",
+   "url": "https://www.travel.taipei/ja"
+  },
+  {
+   "name": "オーストリア",
+   "url": "https://www.austria.info/ja/"
+  },
+  {
+   "name": "フランス",
+   "url": "https://www.france.fr/ja/"
+  },
+  {
+   "name": "スペイン",
+   "url": "https://www.spain.info/ja/"
+  },
+  {
+   "name": "ポーランド",
+   "url": "https://www.poland.travel/ja"
+  },
+  {
+   "name": "フィンランド",
+   "url": "https://www.visitfinland.com/ja/"
+  },
+  {
+   "name": "ニューカレドニア",
+   "url": "https://ja.newcaledonia.travel/"
+  },
+  {
+   "name": "オーストラリア",
+   "url": "https://www.australia.com/ja-jp"
+  },
+  {
+   "name": "南アフリカ",
+   "url": "https://travel.south-africa.jp/"
+  },
+  {
+   "name": "ニュージーランド",
+   "url": "https://www.newzealand.com/jp/"
+  },
+  {
+   "name": "マリアナ",
+   "url": "https://mymarianas.jp/"
+  },
+  {
+   "name": "チュニジア",
+   "url": "https://gotunisia.jp/"
+  },
+  {
+   "name": "ハワイ",
+   "url": "https://www.allhawaii.jp/"
+  },
+  {
+   "name": "カナダ",
+   "url": "https://travel.destinationcanada.com/ja-jp"
+  },
+  {
+   "name": "フィジー",
+   "url": "https://visitfiji.jp/"
+  },
+  {
+   "name": "香港",
+   "url": "https://www.discoverhongkong.com/jp/index.html"
+  },
+  {
+   "name": "ベトナム",
+   "url": "https://vietnam.travel/jp/node/1336"
+  },
+  {
+   "name": "トルコ",
+   "url": "https://goturkiye.jp/"
+  },
+  {
+   "name": "サウジアラビア",
+   "url": "https://www.visitsaudi.com/ja"
+  },
+  {
+   "name": "カリフォルニア",
+   "url": "https://www.visitcalifornia.com/jp/"
+  },
+  {
+   "name": "アメリカ",
+   "url": "https://www.gousa.jp/"
+  }
+ ]
+}
