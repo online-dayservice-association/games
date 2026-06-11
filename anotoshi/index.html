@@ -208,7 +208,7 @@ function buildBirth(){
     o.value=y; o.textContent=y+"年（"+warekiBirth(y)+"）生まれ";
     sel.appendChild(o);
   }
-  sel.onchange=()=>{
+  const render=()=>{
     const list=document.getElementById('ageList');
     list.innerHTML='';
     const b=parseInt(sel.value,10);
@@ -225,6 +225,9 @@ function buildBirth(){
       list.appendChild(a);
     }
   };
+  sel.onchange=render;
+  sel.value='1940'; // 昭和15年生まれを最初から選択（利用者のボリュームゾーン）
+  render();
 }
 
 /* ---------- 年代からえらぶ ---------- */
