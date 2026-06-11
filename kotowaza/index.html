@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ことわざ穴埋め｜あそび・脳トレ素材集</title>
+<meta name="description" content="ことわざの空欄に入る言葉をみんなで当てる定番脳トレ。意味と会話のきっかけつき。オンラインデイサービス協会の無料素材集。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0;}
+
+.stage{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);text-align:center;
+  margin:28px auto 0;max-width:680px;
+  padding:clamp(26px,5.5vw,46px) 16px;
+}
+.q-label{color:var(--muted);font-size:15px;margin:0 0 14px;}
+.question{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(26px,6vw,44px);line-height:1.7;letter-spacing:.04em;
+  display:flex;align-items:center;justify-content:center;min-height:2.6em;
+}
+.question .blank{color:var(--accent-deep);}
+
+.answer{display:none;margin-top:22px;padding-top:20px;border-top:1px dashed var(--line);}
+.answer.show{display:block;}
+.answer .a-label{font-size:14px;color:var(--muted);letter-spacing:.14em;}
+.answer .a-main{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,6vw,42px);color:var(--accent-deep);line-height:1.6;}
+.answer .a-sub{font-size:clamp(15px,3.6vw,17.5px);color:var(--ink);margin-top:6px;}
+
+.talk{
+  display:none;max-width:680px;margin:18px auto 0;
+  background:#edf0e6;border:1px solid var(--accent);border-radius:14px;
+  padding:18px 22px;text-align:center;
+}
+.talk.show{display:block;}
+.talk .t-label{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:700;margin-bottom:4px;}
+.talk .t-q{font-family:var(--font-head);font-weight:700;font-size:clamp(17px,4.2vw,23px);line-height:1.7;}
+
+.controls{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 8px;}
+.btn{
+  font-family:var(--font-body);font-weight:700;font-size:19px;cursor:pointer;
+  padding:15px 40px;border-radius:999px;border:none;
+  background:var(--accent);color:#fff;box-shadow:var(--shadow);
+  transition:background .15s, opacity .15s;
+}
+.btn:hover{background:var(--accent-deep);}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);}
+.btn.ghost:hover{border-color:var(--accent);background:var(--card);}
+
+.howto{
+  max-width:680px;margin:34px auto 0;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;padding:20px 24px;
+  font-size:15.5px;
+}
+.howto b{font-family:var(--font-head);font-size:17px;display:block;margin-bottom:6px;letter-spacing:.04em;}
+.howto ul{margin:0;padding-left:1.3em;}
+.howto li{margin:4px 0;}
+
+footer{margin:44px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+
+  <header>
+    <div class="eyebrow">あそび・脳トレ素材集</div>
+    <h1>ことわざ穴埋め</h1>
+    <p class="lead">◯に入る言葉は何でしょう？　答えのあとは、ことわざにまつわるお話も。</p>
+  </header>
+
+  <main>
+    <div class="stage" aria-live="polite">
+      <p class="q-label">◯に入る言葉は？</p>
+      <div class="question" id="question">…</div>
+      <div class="answer" id="answer">
+        <div class="a-label">こたえ</div>
+        <div class="a-main" id="aMain"></div>
+        <div class="a-sub" id="aImi"></div>
+      </div>
+    </div>
+
+    <div class="talk" id="talk">
+      <div class="t-label">お話のきっかけ</div>
+      <div class="t-q" id="talkQ"></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="showBtn">答えを見る</button>
+      <button class="btn ghost" id="nextBtn">次の問題</button>
+    </div>
+
+    <div class="howto">
+      <b>あそびかた</b>
+      <ul>
+        <li>声に出して読んで、◯に入る言葉をみんなで考えましょう。</li>
+        <li>答えのあとに「お話のきっかけ」が出ます。順番にお話をどうぞ。</li>
+        <li>「ほかの言い方、知ってる？」と聞いてみると、地方の言い回しが出てくることも。</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a><br><span style="display:inline-block;margin-top:10px;">この素材集は、オンラインデイサービスの現場で使われています。<br>サービスを利用してみたい方は <a href="https://www.onlinedayservice.com/#operators">導入事業者のご紹介</a> へ</span></footer>
+</div>
+
+<script>
+const qEl=document.getElementById('question');
+const answerEl=document.getElementById('answer');
+const aMain=document.getElementById('aMain');
+const aImi=document.getElementById('aImi');
+const talkEl=document.getElementById('talk');
+const talkQ=document.getElementById('talkQ');
+const showBtn=document.getElementById('showBtn');
+const nextBtn=document.getElementById('nextBtn');
+let ITEMS=[],order=[],pos=-1,current=null;
+
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+  ITEMS=d.items;
+  order=ITEMS.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  next();
+});
+
+function next(){
+  pos=(pos+1)%order.length;
+  current=ITEMS[order[pos]];
+  const marks='◯'.repeat([...current.hide].length);
+  const idx=current.full.indexOf(current.hide);
+  qEl.innerHTML='';
+  qEl.appendChild(document.createTextNode(current.full.slice(0,idx)));
+  const b=document.createElement('span');b.className='blank';b.textContent=marks;
+  qEl.appendChild(b);
+  qEl.appendChild(document.createTextNode(current.full.slice(idx+current.hide.length)));
+  aMain.textContent=current.full;
+  aImi.textContent='意味：'+current.imi;
+  talkQ.textContent=current.talk;
+  answerEl.classList.remove('show');
+  talkEl.classList.remove('show');
+  showBtn.disabled=false;
+}
+showBtn.addEventListener('click',()=>{
+  if(!current)return;
+  answerEl.classList.add('show');
+  talkEl.classList.add('show');
+  showBtn.disabled=true;
+});
+nextBtn.addEventListener('click',()=>{if(ITEMS.length)next();});
+</script>
+</body>
+</html>
