@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思い出の歌｜あそび・脳トレ素材集</title>
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+header{text-align:center;padding:30px 0 4px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(28px,6vw,42px);letter-spacing:.06em;margin:0 0 8px;}
+.meta-tags{text-align:center;margin:2px 0 0;}
+.meta-tags span{display:inline-block;background:#edf0e6;border:1px solid var(--accent);color:var(--accent-deep);font-weight:700;font-size:14px;border-radius:999px;padding:3px 16px;margin:0 4px 6px;}
+.player-card{
+  background:var(--card);border:2px solid var(--accent);border-radius:18px;
+  box-shadow:var(--shadow);margin:20px auto 0;max-width:680px;
+  padding:clamp(16px,4vw,26px);text-align:center;
+}
+audio{width:100%;}
+.verse{max-width:680px;margin:32px auto 0;}
+.v-label{
+  font-family:var(--font-head);font-weight:700;font-size:15px;letter-spacing:.18em;
+  color:var(--accent-deep);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin-bottom:14px;text-align:center;
+}
+.line-block{text-align:center;margin:0 0 16px;}
+.line-block .ch{
+  display:block;font-size:11.5px;font-weight:700;color:var(--accent-deep);opacity:.8;line-height:1;
+  margin-bottom:2px;
+}
+.line-block .ch b{font-size:12.5px;}
+.line-block .tx{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(24px,5.6vw,32px);line-height:1.6;letter-spacing:.08em;
+}
+.to-menu{text-align:center;margin:38px 0 -6px;}
+.to-menu a{display:inline-block;font-weight:700;font-size:17px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:13px 36px;text-decoration:none;box-shadow:var(--shadow);margin:0 6px;}
+footer{margin:40px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="./">← うたのいちらんへ</a>
+
+  <header>
+    <h1 id="title">…</h1>
+    <div class="meta-tags" id="tags"></div>
+  </header>
+
+  <main>
+    <div class="player-card">
+      <audio controls preload="none" id="player"></audio>
+    </div>
+    <div id="verses"></div>
+  </main>
+
+  <div class="to-menu"><a href="./">うたのいちらんへ</a><a href="../">素材集にもどる</a></div>
+  <footer>歌声: VOICEVOX　／　伴奏: GeneralUser GS<br>一般社団法人オンラインデイサービス協会</footer>
+</div>
+
+<script>
+const id=new URLSearchParams(location.search).get('id');
+const NUM=['一','二','三','四','五'];
+fetch('./data.json?t='+Date.now()).then(r=>r.json()).then(d=>{
+  const s=d.songs.find(x=>x.id===id)||d.songs[0];
+  document.title=s.title+'｜思い出の歌';
+  document.getElementById('title').textContent=s.title;
+  const tags=[s.meter+'拍子','キー：'+s.key,s.lines.length+'番まで',s.season+(s.months.length?'（'+s.months.join('・')+'月）':'')];
+  document.getElementById('tags').innerHTML=tags.map(t=>'<span></span>').join('');
+  document.querySelectorAll('#tags span').forEach((el,i)=>el.textContent=tags[i]);
+  document.getElementById('player').src='./audio/'+s.id+'.wav';
+  const versesEl=document.getElementById('verses');
+  s.lines.forEach((vlines,v)=>{
+    const dv=document.createElement('div');dv.className='verse';
+    if(s.lines.length>1){
+      const lb=document.createElement('div');lb.className='v-label';
+      lb.textContent=(NUM[v]||v+1)+'　番';dv.appendChild(lb);
+    }
+    vlines.forEach((line,li)=>{
+      const blk=document.createElement('p');blk.className='line-block';
+      const chip=(s.chips&&s.chips[v]&&s.chips[v][li])||null;
+      const ch=document.createElement('span');ch.className='ch';
+      if(chip){ch.innerHTML='<b></b> ';ch.querySelector('b').textContent=chip[0];ch.appendChild(document.createTextNode(chip[1]));}
+      else ch.innerHTML='&nbsp;';
+      const tx=document.createElement('span');tx.className='tx';tx.textContent=line;
+      blk.appendChild(ch);blk.appendChild(tx);
+      dv.appendChild(blk);
+    });
+    versesEl.appendChild(dv);
+  });
+});
+</script>
+</body>
+</html>
