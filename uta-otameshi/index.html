@@ -34,6 +34,17 @@ audio{width:100%;}
   margin:26px 0 0;
 }
 .note{max-width:680px;margin:28px auto 0;color:var(--muted);font-size:14px;text-align:center;}
+.meta-tags{text-align:center;margin:4px 0 0;}
+.meta-tags span{display:inline-block;background:#edf0e6;border:1px solid var(--accent);color:var(--accent-deep);font-weight:700;font-size:14px;border-radius:999px;padding:3px 16px;margin:0 4px;}
+.chordline{line-height:2.6;}
+.ch{
+  display:inline-block;vertical-align:8px;
+  font-family:var(--font-body);font-weight:700;font-size:12px;line-height:1;
+  color:var(--accent-deep);background:#edf0e6;border:1px solid var(--line);
+  border-radius:6px;padding:3px 6px;margin:0 2px 0 10px;white-space:nowrap;
+}
+.ch b{font-size:13px;}
+.legend{max-width:680px;margin:14px auto 0;color:var(--muted);font-size:13px;text-align:center;}
 </style>
 </head>
 <body>
@@ -41,6 +52,7 @@ audio{width:100%;}
   <header>
     <div class="eyebrow">おためし（メニュー未掲載）</div>
     <h1>AIの歌声「ふるさと」</h1>
+    <div class="meta-tags"><span>3拍子</span><span>キー：E♭</span><span>テンポ：ゆったり76</span></div>
     <p class="lead">キーは4つ下げ（いちばん高い音がド）・テンポゆったりめ。前奏(2小節)のあと、歌が始まります。</p>
   </header>
 
@@ -75,12 +87,13 @@ audio{width:100%;}
       <audio controls preload="none" src="./furusato_ritsu.wav"></audio>
     </div>
 
-    <div class="lyrics">
-      うさぎ追いし　かの山<br>
-      小鮒釣りし　かの川<br>
-      夢は今も　めぐりて<br>
-      忘れがたき　故郷
+    <div class="lyrics chordline">
+      <span class="ch"><b>1</b> E♭</span>うさぎ<span class="ch"><b>5⁷</b> B♭7</span>追いし　<span class="ch"><b>1</b> E♭</span>かの山<br>
+      <span class="ch"><b>4</b> A♭</span>小鮒<span class="ch"><b>1</b> E♭</span>釣りし　<span class="ch"><b>5⁷</b> B♭7</span>かの<span class="ch"><b>1</b> E♭</span>川<br>
+      <span class="ch"><b>5⁷</b> B♭7</span>夢は<span class="ch"><b>1</b> E♭</span>今も　<span class="ch"><b>4</b> A♭</span>めぐり<span class="ch"><b>1</b> E♭</span>て<br>
+      <span class="ch"><b>5⁷</b> B♭7</span>忘れ<span class="ch"><b>6m7</b> Cm7</span>がたき　<span class="ch"><b>4</b> A♭</span>ふるさ<span class="ch"><b>5⁷</b> B♭7</span><span class="ch"><b>1</b> E♭</span>と
     </div>
+    <p class="legend">数字はコードの度数（インスタコード等の1〜7ボタンに対応）。キーをE♭に合わせれば 1=E♭、4=A♭、5⁷=B♭7、6m7=Cm7 です。</p>
 
     <p class="note">
       曲・詞は著作権保護期間満了（高野辰之・岡野貞一）。<br>
