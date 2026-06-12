@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>歌声のおためし（非公開）｜あそび・脳トレ素材集</title>
+<title>ふるさと（おためし）｜あそび・脳トレ素材集</title>
 <meta name="robots" content="noindex">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,88 +18,88 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-hei
 .wrap{max-width:860px;margin:0 auto;padding:0 16px;}
 header{text-align:center;padding:34px 0 6px;}
 .eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
-h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
-.lead{color:var(--muted);font-size:15px;margin:0;}
-.card{
-  background:var(--card);border:1px solid var(--line);border-radius:18px;
-  box-shadow:var(--shadow);margin:24px auto 0;max-width:680px;
-  padding:clamp(22px,5vw,36px) clamp(16px,4vw,32px);
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(28px,6vw,42px);letter-spacing:.06em;margin:0 0 8px;}
+.meta-tags{text-align:center;margin:2px 0 0;}
+.meta-tags span{display:inline-block;background:#edf0e6;border:1px solid var(--accent);color:var(--accent-deep);font-weight:700;font-size:14px;border-radius:999px;padding:3px 16px;margin:0 4px 6px;}
+
+.player-card{
+  background:var(--card);border:2px solid var(--accent);border-radius:18px;
+  box-shadow:var(--shadow);margin:22px auto 0;max-width:680px;
+  padding:clamp(18px,4vw,28px) clamp(16px,4vw,28px);text-align:center;
 }
-.v-name{font-family:var(--font-head);font-weight:700;font-size:clamp(20px,4.6vw,26px);margin:0 0 4px;}
-.v-desc{color:var(--muted);font-size:14.5px;margin:0 0 12px;}
 audio{width:100%;}
-.lyrics{
-  font-family:var(--font-head);font-weight:500;text-align:center;
-  font-size:clamp(18px,4.4vw,24px);line-height:2.1;letter-spacing:.06em;
-  margin:26px 0 0;
+.p-note{color:var(--muted);font-size:14px;margin:8px 0 0;}
+
+.verse{max-width:680px;margin:34px auto 0;}
+.v-label{
+  font-family:var(--font-head);font-weight:700;font-size:15px;letter-spacing:.18em;
+  color:var(--accent-deep);border-bottom:1px solid var(--line);
+  padding-bottom:6px;margin-bottom:14px;text-align:center;
 }
-.note{max-width:680px;margin:28px auto 0;color:var(--muted);font-size:14px;text-align:center;}
-.meta-tags{text-align:center;margin:4px 0 0;}
-.meta-tags span{display:inline-block;background:#edf0e6;border:1px solid var(--accent);color:var(--accent-deep);font-weight:700;font-size:14px;border-radius:999px;padding:3px 16px;margin:0 4px;}
-.chordline{line-height:2.6;}
-.ch{
-  display:inline-block;vertical-align:8px;
-  font-family:var(--font-body);font-weight:700;font-size:12px;line-height:1;
-  color:var(--accent-deep);background:#edf0e6;border:1px solid var(--line);
-  border-radius:6px;padding:3px 6px;margin:0 2px 0 10px;white-space:nowrap;
+.line{text-align:center;margin:0 0 18px;white-space:nowrap;}
+@media (max-width:560px){ .line{white-space:normal;} }
+.seg{display:inline-flex;flex-direction:column;align-items:flex-start;vertical-align:bottom;}
+.seg .ch{
+  font-family:var(--font-body);font-weight:700;font-size:11.5px;line-height:1;
+  color:var(--accent-deep);opacity:.85;height:13px;
 }
-.ch b{font-size:13px;}
-.legend{max-width:680px;margin:14px auto 0;color:var(--muted);font-size:13px;text-align:center;}
+.seg .ch b{font-size:12.5px;}
+.seg .tx{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(24px,5.6vw,32px);line-height:1.5;letter-spacing:.08em;
+}
+.sp{display:inline-block;width:1.2em;}
+
+.legend{max-width:680px;margin:30px auto 0;color:var(--muted);font-size:13.5px;text-align:center;line-height:1.9;}
+footer{margin:44px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div class="eyebrow">おためし（メニュー未掲載）</div>
-    <h1>AIの歌声「ふるさと」</h1>
-    <div class="meta-tags"><span>3拍子</span><span>キー：E♭</span><span>テンポ：ゆったり76</span></div>
-    <p class="lead">キーは4つ下げ（いちばん高い音がド）・テンポゆったりめ。前奏(2小節)のあと、歌が始まります。</p>
+    <h1>ふるさと</h1>
+    <div class="meta-tags"><span>３拍子</span><span>キー：E♭</span><span>ゆったり（♩＝76）</span><span>３番まで</span></div>
   </header>
 
   <main>
-    <div class="card" style="border-color:var(--accent);border-width:2px;">
-      <p class="v-name">🆕 定番コード進行版</p>
-      <p class="v-desc">伴奏の和音を、世間で広く使われている定番の進行(G→D7→…→Em7→C→D7→G)に差し替え。音量バランスは大きめ版と同じ。</p>
-      <audio controls preload="none" src="./furusato_teiban.wav"></audio>
+    <div class="player-card">
+      <audio controls preload="none" src="./furusato_full.wav"></audio>
+      <p class="p-note">前奏２小節 →１番 → 間奏 →２番 →３番（２分13秒）</p>
     </div>
 
-    <div class="card">
-      <p class="v-name">（参考）伴奏大きめ版・コード自動割り当て</p>
-      <p class="v-desc"></p>
-      <audio controls preload="none" src="./furusato_ookime.wav"></audio>
+    <div class="verse">
+      <div class="v-label">一　番</div>
+      <p class="line"><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">うさぎ</span></span><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">追いし</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">かの山</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">小鮒</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">釣りし</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">かの</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">川</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">夢は</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">今も</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">めぐり</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">て</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">忘れ</span></span><span class="seg"><span class="ch"><b>6m7</b> Cm7</span><span class="tx">がたき</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">ふるさ</span></span><span class="seg"><span class="ch"><b>5⁷</b>→<b>1</b></span><span class="tx">と</span></span></p>
     </div>
 
-    <div class="card">
-      <p class="v-name">（参考）伴奏ひかえめ版・旧</p>
-      <p class="v-desc"></p>
-      <audio controls preload="none" src="./furusato_piano.wav"></audio>
+    <div class="verse">
+      <div class="v-label">二　番</div>
+      <p class="line"><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">いかに</span></span><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">います</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">父母</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">つつが</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">なしや</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">友</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">がき</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">雨に</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">風に</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">つけ</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">ても</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">思い</span></span><span class="seg"><span class="ch"><b>6m7</b> Cm7</span><span class="tx">いずる</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">ふるさ</span></span><span class="seg"><span class="ch"><b>5⁷</b>→<b>1</b></span><span class="tx">と</span></span></p>
     </div>
 
-    <div class="card">
-      <p class="v-name">（参考）前回のオルゴール風伴奏</p>
-      <p class="v-desc"></p>
-      <audio controls preload="none" src="./furusato_bansou.wav"></audio>
+    <div class="verse">
+      <div class="v-label">三　番</div>
+      <p class="line"><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">こころ</span></span><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">ざしを</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">はたして</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">いつの</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">日にか</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">帰ら</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">ん</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">山は</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">青き</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">ふるさ</span></span><span class="seg"><span class="ch"><b>1</b> E♭</span><span class="tx">と</span></span></p>
+      <p class="line"><span class="seg"><span class="ch"><b>5⁷</b> B♭7</span><span class="tx">水は</span></span><span class="seg"><span class="ch"><b>6m7</b> Cm7</span><span class="tx">清き</span></span><span class="sp"></span><span class="seg"><span class="ch"><b>4</b> A♭</span><span class="tx">ふるさ</span></span><span class="seg"><span class="ch"><b>5⁷</b>→<b>1</b></span><span class="tx">と</span></span></p>
     </div>
 
-    <div class="card">
-      <p class="v-name">（参考）歌声だけ・伴奏なし</p>
-      <p class="v-desc">前回お聴きいただいたもの。</p>
-      <audio controls preload="none" src="./furusato_ritsu.wav"></audio>
-    </div>
-
-    <div class="lyrics chordline">
-      <span class="ch"><b>1</b> E♭</span>うさぎ<span class="ch"><b>5⁷</b> B♭7</span>追いし　<span class="ch"><b>1</b> E♭</span>かの山<br>
-      <span class="ch"><b>4</b> A♭</span>小鮒<span class="ch"><b>1</b> E♭</span>釣りし　<span class="ch"><b>5⁷</b> B♭7</span>かの<span class="ch"><b>1</b> E♭</span>川<br>
-      <span class="ch"><b>5⁷</b> B♭7</span>夢は<span class="ch"><b>1</b> E♭</span>今も　<span class="ch"><b>4</b> A♭</span>めぐり<span class="ch"><b>1</b> E♭</span>て<br>
-      <span class="ch"><b>5⁷</b> B♭7</span>忘れ<span class="ch"><b>6m7</b> Cm7</span>がたき　<span class="ch"><b>4</b> A♭</span>ふるさ<span class="ch"><b>5⁷</b> B♭7</span><span class="ch"><b>1</b> E♭</span>と
-    </div>
-    <p class="legend">数字はコードの度数（インスタコード等の1〜7ボタンに対応）。キーをE♭に合わせれば 1=E♭、4=A♭、5⁷=B♭7、6m7=Cm7 です。</p>
-
-    <p class="note">
-      曲・詞は著作権保護期間満了（高野辰之・岡野貞一）。<br>
-      歌声: VOICEVOX:波音リツ ／ 伴奏: 協会オリジナル(自動生成・ピアノ音色 GeneralUser GS)
+    <p class="legend">
+      小さな数字はコードの度数（インスタコード等の１〜７ボタンに対応）。<br>
+      キーをE♭に合わせると、1=E♭　4=A♭　5⁷=B♭7　6m7=Cm7 です。<br>
+      曲・詞は著作権保護期間満了（高野辰之・岡野貞一）／歌声: VOICEVOX:波音リツ／伴奏: ピアノ（GeneralUser GS）
     </p>
   </main>
+
+  <footer>一般社団法人オンラインデイサービス協会</footer>
 </div>
 </body>
 </html>
