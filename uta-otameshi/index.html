@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>歌声のおためし（非公開）｜あそび・脳トレ素材集</title>
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0;}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);margin:24px auto 0;max-width:680px;
+  padding:clamp(22px,5vw,36px) clamp(16px,4vw,32px);
+}
+.v-name{font-family:var(--font-head);font-weight:700;font-size:clamp(20px,4.6vw,26px);margin:0 0 4px;}
+.v-desc{color:var(--muted);font-size:14.5px;margin:0 0 12px;}
+audio{width:100%;}
+.lyrics{
+  font-family:var(--font-head);font-weight:500;text-align:center;
+  font-size:clamp(18px,4.4vw,24px);line-height:2.1;letter-spacing:.06em;
+  margin:26px 0 0;
+}
+.note{max-width:680px;margin:28px auto 0;color:var(--muted);font-size:14px;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">おためし（メニュー未掲載）</div>
+    <h1>AIの歌声「ふるさと」</h1>
+    <p class="lead">キーは4つ下げ（いちばん高い音がド）・テンポゆったりめ。3つの声でくらべられます。</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <p class="v-name">① 波音リツ（歌専用の声）</p>
+      <p class="v-desc">VOICEVOXで唯一の「歌専用」モデル。いちばん歌がうまい声です。</p>
+      <audio controls preload="none" src="./furusato_ritsu.wav"></audio>
+    </div>
+
+    <div class="card">
+      <p class="v-name">② 春歌ナナ</p>
+      <p class="v-desc">あかるく、やわらかい声。</p>
+      <audio controls preload="none" src="./furusato_haruka.wav"></audio>
+    </div>
+
+    <div class="card">
+      <p class="v-name">③ 九州そら</p>
+      <p class="v-desc">おだやかで、おとなびた声。</p>
+      <audio controls preload="none" src="./furusato_sora.wav"></audio>
+    </div>
+
+    <div class="lyrics">
+      うさぎ追いし　かの山<br>
+      小鮒釣りし　かの川<br>
+      夢は今も　めぐりて<br>
+      忘れがたき　故郷
+    </div>
+
+    <p class="note">
+      曲・詞は著作権保護期間満了（高野辰之・岡野貞一）。<br>
+      歌声: VOICEVOX:波音リツ ／ VOICEVOX:春歌ナナ ／ VOICEVOX:九州そら
+    </p>
+  </main>
+</div>
+</body>
+</html>
