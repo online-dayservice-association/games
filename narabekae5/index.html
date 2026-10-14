@@ -145,8 +145,8 @@ function shuffleWord(w){
       [a[i],a[j]]=[a[j],a[i]];
     }
     s=a.join('');
-    if(++guard>50)break;
-  }while(s===w||hasRun(w,s,3));
+    if(++guard>1000)break;
+  }while(s===w||s[0]===w[0]||s[s.length-1]===w[w.length-1]||hasRun(w,s,3));
   return s;
 }
 function next(){
