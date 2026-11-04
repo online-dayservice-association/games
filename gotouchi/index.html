@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手づくりご当地クイズ｜あそび・脳トレ素材集</title>
+<meta name="description" content="自分の町・ふるさとの問題を打ちこむだけで、3つのヒントのご当地クイズがつくれます。ふるさと会や地域の集まりに。オンラインデイサービス協会の無料素材集。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/tokens.css">
+
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px;}
+.backlink{display:inline-block;margin:20px 8px 0 0;color:var(--accent-deep);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line);}
+.backlink:hover{border-color:var(--accent);}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px;}
+
+header{text-align:center;padding:34px 0 6px;}
+.eyebrow{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:500;margin-bottom:12px;}
+h1{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,5vw,38px);letter-spacing:.04em;margin:0 0 10px;}
+.lead{color:var(--muted);font-size:15px;margin:0;}
+
+.tabs{display:flex;justify-content:center;gap:10px;margin:24px 0 0;flex-wrap:wrap;}
+.tab{
+  font-family:var(--font-body);font-weight:700;font-size:16px;cursor:pointer;
+  padding:9px 26px;border-radius:999px;background:var(--card);color:var(--ink);border:1px solid var(--line);
+}
+.tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+.stage{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);
+  margin:20px auto 0;max-width:680px;
+  padding:clamp(26px,5.5vw,46px) clamp(16px,4vw,36px);
+}
+.quiz-title{text-align:center;font-family:var(--font-head);font-weight:700;font-size:clamp(20px,4.8vw,28px);color:var(--accent-deep);margin:0 0 4px;}
+.q-label{color:var(--muted);font-size:15px;margin:0 0 14px;text-align:center;}
+.hint{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px dashed var(--line);}
+.hint:last-of-type{border-bottom:none;}
+.hint[hidden]{display:none;}
+.hint .no{flex:none;font-family:var(--font-head);font-weight:700;font-size:15px;color:#fff;background:var(--accent);border-radius:999px;padding:3px 14px;margin-top:5px;white-space:nowrap;}
+.hint .txt{font-family:var(--font-head);font-weight:700;font-size:clamp(18px,4.6vw,24px);line-height:1.7;}
+.hint.locked .no{background:var(--line);color:var(--muted);}
+.hint.locked .txt{color:var(--line);}
+.hint.locked .txt::before{content:"（まだひみつ）";font-size:.7em;color:var(--muted);font-family:var(--font-body);font-weight:400;}
+.hint.locked .txt span{display:none;}
+.answer{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed var(--line);text-align:center;}
+.answer.show{display:block;}
+.answer .a-label{font-size:14px;color:var(--muted);letter-spacing:.14em;}
+.answer .a-main{font-family:var(--font-head);font-weight:700;font-size:clamp(32px,8vw,54px);color:var(--accent-deep);line-height:1.4;}
+.empty{text-align:center;color:var(--muted);font-size:17px;}
+
+.talk{display:none;max-width:680px;margin:18px auto 0;background:#edf0e6;border:1px solid var(--accent);border-radius:14px;padding:18px 22px;text-align:center;}
+.talk.show{display:block;}
+.talk .t-label{font-size:13px;letter-spacing:.18em;color:var(--accent-deep);font-weight:700;margin-bottom:4px;}
+.talk .t-q{font-family:var(--font-head);font-weight:700;font-size:clamp(17px,4.2vw,23px);line-height:1.7;}
+
+.controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:26px 0 8px;}
+.btn{
+  font-family:var(--font-body);font-weight:700;font-size:18px;cursor:pointer;
+  padding:14px 32px;border-radius:999px;border:none;
+  background:var(--accent);color:#fff;box-shadow:var(--shadow);
+  transition:background .15s, opacity .15s;
+}
+.btn:hover{background:var(--accent-deep);}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);}
+.btn.ghost:hover{border-color:var(--accent);background:var(--card);}
+.btn.small{font-size:15px;padding:8px 18px;box-shadow:none;}
+
+/* 問題づくり */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);margin:20px auto 0;max-width:680px;padding:24px clamp(16px,4vw,30px);}
+.panel h2{font-family:var(--font-head);font-size:20px;margin:0 0 10px;letter-spacing:.04em;}
+.field{margin:0 0 14px;}
+.field label{display:block;font-weight:700;font-size:15px;margin-bottom:4px;}
+.field .opt{font-weight:400;color:var(--muted);font-size:13px;}
+.field input,.field textarea{
+  width:100%;font-family:var(--font-body);font-size:17px;color:var(--ink);
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+}
+.field textarea{min-height:3.2em;resize:vertical;}
+.list{list-style:none;margin:0;padding:0;}
+.list li{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line);}
+.list li:last-child{border-bottom:none;}
+.list .q{font-weight:700;font-size:16px;}
+.list .q small{display:block;font-weight:400;color:var(--muted);font-size:13.5px;}
+.list .ops{display:flex;gap:6px;flex:none;}
+.msg{color:var(--accent-deep);font-size:15px;min-height:1.6em;margin:6px 0 0;}
+.row{display:flex;gap:10px;flex-wrap:wrap;}
+
+.howto{max-width:680px;margin:34px auto 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;font-size:15.5px;}
+.howto b{font-family:var(--font-head);font-size:17px;display:block;margin-bottom:6px;letter-spacing:.04em;}
+.howto ul{margin:0;padding-left:1.3em;}
+.howto li{margin:4px 0;}
+
+footer{margin:44px 0 56px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px;}
+footer a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="../">← 素材集にもどる</a>
+
+  <header>
+    <div class="eyebrow">あそび・脳トレ素材集</div>
+    <h1>手づくりご当地クイズ</h1>
+    <p class="lead">自分の町・ふるさとの問題を打ちこむだけで、3つのヒントのクイズになります。</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tabPlay" aria-selected="true">あそぶ</button>
+    <button class="tab" role="tab" id="tabEdit" aria-selected="false">問題をつくる</button>
+  </div>
+
+  <main>
+    <!-- あそぶ -->
+    <section id="playView">
+      <div class="stage" aria-live="polite">
+        <p class="quiz-title" id="quizTitle"></p>
+        <div id="quizBody">
+          <p class="q-label">何でしょう？</p>
+          <div class="hint" id="h0"><span class="no">ヒント１</span><span class="txt"><span></span></span></div>
+          <div class="hint locked" id="h1"><span class="no">ヒント２</span><span class="txt"><span></span></span></div>
+          <div class="hint locked" id="h2"><span class="no">ヒント３</span><span class="txt"><span></span></span></div>
+          <div class="answer" id="answer">
+            <div class="a-label">こたえ</div>
+            <div class="a-main" id="aMain"></div>
+          </div>
+        </div>
+        <p class="empty" id="emptyMsg" hidden>まだ問題がありません。「問題をつくる」から入れてください。</p>
+      </div>
+
+      <div class="talk" id="talk">
+        <div class="t-label">お話のきっかけ</div>
+        <div class="t-q" id="talkQ"></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="hintBtn">次のヒント</button>
+        <button class="btn ghost" id="showBtn">答えを見る</button>
+        <button class="btn ghost" id="nextBtn">次の問題</button>
+      </div>
+    </section>
+
+    <!-- 問題をつくる -->
+    <section id="editView" hidden>
+      <div class="panel">
+        <h2>クイズの名前</h2>
+        <div class="field">
+          <input id="titleIn" type="text" placeholder="（例）ふるさと○○町クイズ" maxlength="40">
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 id="formHead">問題を入れる</h2>
+        <div class="field"><label for="aIn">こたえ</label><input id="aIn" type="text" placeholder="（例）○○神社の秋祭り" maxlength="40"></div>
+        <div class="field"><label for="h0In">ヒント１（いちばん難しいヒント）</label><input id="h0In" type="text" maxlength="60"></div>
+        <div class="field"><label for="h1In">ヒント２ <span class="opt">（なくてもかまいません）</span></label><input id="h1In" type="text" maxlength="60"></div>
+        <div class="field"><label for="h2In">ヒント３（いちばんやさしいヒント） <span class="opt">（なくてもかまいません）</span></label><input id="h2In" type="text" maxlength="60"></div>
+        <div class="field"><label for="tIn">お話のきっかけ <span class="opt">（答えのあとに出す問いかけ・なくてもかまいません）</span></label><textarea id="tIn" maxlength="80" placeholder="（例）お祭りの夜店で、何を買いましたか？"></textarea></div>
+        <div class="row">
+          <button class="btn" id="saveBtn">この問題を入れる</button>
+          <button class="btn ghost" id="cancelBtn" hidden>書きかえをやめる</button>
+        </div>
+        <p class="msg" id="msg"></p>
+      </div>
+
+      <div class="panel">
+        <h2>入っている問題（<span id="count">0</span>問）</h2>
+        <ul class="list" id="list"></ul>
+      </div>
+
+      <div class="panel">
+        <h2>ほかのパソコンでも使う</h2>
+        <p style="margin:0 0 12px;font-size:15px;color:var(--muted);">問題は、このパソコン（このブラウザ）の中にだけ保存されます。ほかのパソコンで使うときや、控えを残すときは、ファイルに書き出して、相手のパソコンで読みこんでください。</p>
+        <div class="row">
+          <button class="btn ghost small" id="exportBtn">ファイルに書き出す</button>
+          <button class="btn ghost small" id="importBtn">ファイルを読みこむ</button>
+          <button class="btn ghost small" id="sampleBtn">見本の問題にもどす</button>
+          <input type="file" id="fileIn" accept=".json,application/json" hidden>
+        </div>
+      </div>
+    </section>
+
+    <div class="howto">
+      <b>あそびかた・つくりかた</b>
+      <ul>
+        <li>はじめは見本の問題が入っています。「問題をつくる」で消して、自分の町の問題に入れかえてください。</li>
+        <li>お題の例：町の名所、お祭り、名物、昔あったお店、学校の校歌、川や山の名前、町の偉人など。</li>
+        <li>ヒントは「むずかしい → やさしい」の順に。ヒント３で答えがわかるくらいがちょうどよいです。</li>
+        <li>ふるさと会なら、参加者に事前に「ふるさとの自慢」を聞いて問題にすると、当日いちばん盛り上がります。</li>
+        <li>個人のお名前や、ご家庭の事情がわかる内容は問題にしないでください。</li>
+      </ul>
+    </div>
+  </main>
+
+  <div class="to-menu" style="text-align:center;margin:38px 0 -6px;"><a href="../" style="display:inline-block;font-family:var(--font-body);font-weight:700;font-size:17px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:13px 40px;text-decoration:none;box-shadow:var(--shadow);">← 素材集にもどる</a></div>
+<footer>一般社団法人オンラインデイサービス協会<br><a href="https://www.onlinedayservice.com">www.onlinedayservice.com</a><br><span style="display:inline-block;margin-top:10px;">この素材集は、オンラインデイサービスの現場で使われています。<br>サービスを利用してみたい方は <a href="https://www.onlinedayservice.com/#operators">導入事業者のご紹介</a> へ</span></footer>
+</div>
+
+<script>
+const KEY='ods-gotouchi-quiz';
+const SAMPLE={
+  title:'見本：ふるさと日本クイズ',
+  items:[
+    {answer:'富士山',hints:['昔から絵や歌にたくさん描かれてきました','世界文化遺産に登録されています','日本でいちばん高い山'],talk:'ふるさとから見えた山の名前は何ですか？'},
+    {answer:'盆踊り',hints:['夏の夜、やぐらのまわりに人が集まります','ゆかた姿で輪になります','太鼓や歌に合わせて踊ります'],talk:'ふるさとの盆踊りの歌、覚えていますか？'},
+    {answer:'駄菓子屋さん',hints:['子どもたちのたまり場でした','十円玉をにぎりしめて通いました','くじ引きやあめ玉、ラムネを売っていました'],talk:'駄菓子屋さんで何を買いましたか？'}
+  ]
+};
+function load(){
+  try{const s=localStorage.getItem(KEY);if(s){const d=JSON.parse(s);if(d&&Array.isArray(d.items))return d;}}catch(e){}
+  return JSON.parse(JSON.stringify(SAMPLE));
+}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(DATA));}catch(e){}}
+let DATA=load();
+
+/* ---------- あそぶ ---------- */
+const hintEls=[0,1,2].map(i=>document.getElementById('h'+i));
+const answerEl=document.getElementById('answer'),aMain=document.getElementById('aMain');
+const talkEl=document.getElementById('talk'),talkQ=document.getElementById('talkQ');
+const hintBtn=document.getElementById('hintBtn'),showBtn=document.getElementById('showBtn'),nextBtn=document.getElementById('nextBtn');
+const quizBody=document.getElementById('quizBody'),emptyMsg=document.getElementById('emptyMsg');
+let order=[],pos=-1,current=null,opened=1;
+
+function hintsOf(it){return it.hints.filter(h=>h&&h.trim());}
+function shuffle(){
+  order=DATA.items.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  pos=-1;
+}
+function paint(){
+  const hs=hintsOf(current);
+  hintEls.forEach((el,i)=>{
+    el.hidden=(i>=hs.length);
+    el.classList.toggle('locked',i>=opened);
+    el.querySelector('.txt span').textContent=hs[i]||'';
+  });
+  hintBtn.disabled=(opened>=hs.length);
+}
+function next(){
+  document.getElementById('quizTitle').textContent=DATA.title||'';
+  const has=DATA.items.length>0;
+  quizBody.hidden=!has;emptyMsg.hidden=has;
+  [hintBtn,showBtn,nextBtn].forEach(b=>b.disabled=!has);
+  answerEl.classList.remove('show');talkEl.classList.remove('show');
+  if(!has){current=null;return;}
+  pos=(pos+1)%order.length;
+  current=DATA.items[order[pos]];
+  opened=1;
+  paint();
+  aMain.textContent=current.answer;
+  talkQ.textContent=current.talk||'';
+}
+hintBtn.addEventListener('click',()=>{if(current&&opened<hintsOf(current).length){opened++;paint();}});
+showBtn.addEventListener('click',()=>{
+  if(!current)return;
+  opened=3;paint();
+  answerEl.classList.add('show');
+  if(current.talk)talkEl.classList.add('show');
+  showBtn.disabled=true;
+});
+nextBtn.addEventListener('click',next);
+
+/* ---------- タブ ---------- */
+const tabPlay=document.getElementById('tabPlay'),tabEdit=document.getElementById('tabEdit');
+const playView=document.getElementById('playView'),editView=document.getElementById('editView');
+function setTab(edit){
+  tabPlay.setAttribute('aria-selected',edit?'false':'true');
+  tabEdit.setAttribute('aria-selected',edit?'true':'false');
+  playView.hidden=edit;editView.hidden=!edit;
+  if(edit){renderList();}else{shuffle();next();}
+}
+tabPlay.addEventListener('click',()=>setTab(false));
+tabEdit.addEventListener('click',()=>setTab(true));
+
+/* ---------- 問題をつくる ---------- */
+const titleIn=document.getElementById('titleIn');
+const aIn=document.getElementById('aIn'),hIn=[0,1,2].map(i=>document.getElementById('h'+i+'In')),tIn=document.getElementById('tIn');
+const saveBtn=document.getElementById('saveBtn'),cancelBtn=document.getElementById('cancelBtn'),msg=document.getElementById('msg');
+const listEl=document.getElementById('list');
+let editing=-1;
+
+titleIn.value=DATA.title||'';
+titleIn.addEventListener('input',()=>{DATA.title=titleIn.value.trim();persist();});
+
+function clearForm(){
+  aIn.value='';hIn.forEach(x=>x.value='');tIn.value='';
+  editing=-1;saveBtn.textContent='この問題を入れる';cancelBtn.hidden=true;
+  document.getElementById('formHead').textContent='問題を入れる';
+}
+function renderList(){
+  document.getElementById('count').textContent=DATA.items.length;
+  listEl.innerHTML='';
+  if(!DATA.items.length){
+    const li=document.createElement('li');li.textContent='まだ問題がありません。';li.style.color='var(--muted)';listEl.appendChild(li);return;
+  }
+  DATA.items.forEach((it,i)=>{
+    const li=document.createElement('li');
+    const q=document.createElement('div');q.className='q';
+    q.textContent=(i+1)+'. '+it.answer;
+    const sm=document.createElement('small');sm.textContent='ヒント１：'+(it.hints[0]||'');q.appendChild(sm);
+    const ops=document.createElement('div');ops.className='ops';
+    const e=document.createElement('button');e.className='btn ghost small';e.textContent='書きかえ';
+    e.addEventListener('click',()=>{
+      editing=i;aIn.value=it.answer;hIn.forEach((x,k)=>x.value=it.hints[k]||'');tIn.value=it.talk||'';
+      saveBtn.textContent='書きかえを保存';cancelBtn.hidden=false;
+      document.getElementById('formHead').textContent=(i+1)+'問目を書きかえる';
+      msg.textContent='';aIn.focus();
+    });
+    const d=document.createElement('button');d.className='btn ghost small';d.textContent='消す';
+    d.addEventListener('click',()=>{
+      if(!confirm('「'+it.answer+'」の問題を消しますか？'))return;
+      DATA.items.splice(i,1);persist();clearForm();renderList();msg.textContent='消しました。';
+    });
+    ops.append(e,d);li.append(q,ops);listEl.appendChild(li);
+  });
+}
+saveBtn.addEventListener('click',()=>{
+  const a=aIn.value.trim(),hs=hIn.map(x=>x.value.trim());
+  if(!a){msg.textContent='「こたえ」を入れてください。';aIn.focus();return;}
+  if(!hs[0]){msg.textContent='「ヒント１」を入れてください。';hIn[0].focus();return;}
+  const item={answer:a,hints:hs.filter(Boolean),talk:tIn.value.trim()};
+  if(editing>=0){DATA.items[editing]=item;msg.textContent='書きかえました。';}
+  else{DATA.items.push(item);msg.textContent='「'+a+'」を入れました。続けてどうぞ。';}
+  persist();clearForm();renderList();aIn.focus();
+});
+cancelBtn.addEventListener('click',()=>{clearForm();msg.textContent='';});
+
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(DATA,null,1)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=((DATA.title||'ご当地クイズ').replace(/[\\/:*?"<>|]/g,''))+'.json';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  msg.textContent='';
+});
+const fileIn=document.getElementById('fileIn');
+document.getElementById('importBtn').addEventListener('click',()=>fileIn.click());
+fileIn.addEventListener('change',()=>{
+  const f=fileIn.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      if(!d||!Array.isArray(d.items))throw 0;
+      const items=d.items.filter(it=>it&&it.answer&&Array.isArray(it.hints)&&it.hints[0]).map(it=>({answer:String(it.answer),hints:it.hints.slice(0,3).map(String),talk:it.talk?String(it.talk):''}));
+      if(DATA.items.length&&!confirm('いま入っている問題を、読みこんだ問題（'+items.length+'問）に入れかえます。よろしいですか？'))return;
+      DATA={title:d.title?String(d.title):'',items};
+      persist();titleIn.value=DATA.title;clearForm();renderList();
+      alert(items.length+'問を読みこみました。');
+    }catch(e){alert('このファイルは読みこめませんでした。ここで書き出したファイルを選んでください。');}
+    fileIn.value='';
+  };
+  r.readAsText(f);
+});
+document.getElementById('sampleBtn').addEventListener('click',()=>{
+  if(!confirm('いま入っている問題を消して、見本の問題にもどします。よろしいですか？'))return;
+  DATA=JSON.parse(JSON.stringify(SAMPLE));persist();titleIn.value=DATA.title;clearForm();renderList();
+});
+
+shuffle();next();
+</script>
+</body>
+</html>
