@@ -6,9 +6,11 @@ on:
   push:
     paths:
       - "**/data.json"
+      - "games.json"
   pull_request:
     paths:
       - "**/data.json"
+      - "games.json"
   workflow_dispatch:
 
 jobs:
@@ -27,5 +29,5 @@ jobs:
               echo "壊れています: $f"
               fail=1
             fi
-          done < <(find . -name 'data.json' -not -path './.git/*')
+          done < <(find . \( -name 'data.json' -o -name 'games.json' \) -not -path './.git/*')
           exit $fail

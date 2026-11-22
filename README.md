@@ -12,7 +12,9 @@
 
 ```
 games/
-├─ index.html              … メニュー（全ゲーム一覧）
+├─ index.html              … メニュー（games.json を読んで並べる）
+├─ games.json              … 素材の一覧表（足すのはここだけ）
+├─ embed.js                … 導入事業者のページに一覧を自動で並べる部品
 ├─ CNAME                   … game.onlinedayservice.com
 ├─ wakamono-nayami/
 │   └─ index.html          … 「若者の悩みに答えよう」
@@ -22,7 +24,7 @@ games/
 ## ゲームの追加方法
 
 1. `ゲーム名/index.html` のフォルダを追加（単体HTML推奨）。
-2. ルートの `index.html`（メニュー）にカードを1枚足す。
+2. ルートの `games.json`（素材の一覧表）に1行足す。メニュー（`index.html`）と、`embed.js` を置いている導入事業者のページの両方に自動で出る。
 3. `main` に push すると GitHub Pages が自動で反映。
 
 ## 方針
